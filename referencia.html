@@ -1,0 +1,2647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REFERENCIA RÁPIDA SQL</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+    <header>
+        <h1>REFERENCIA RÁPIDA SQL</h1>
+        <div class="subtitle">Informática e Tecnologias Multimédia &nbsp;&nbsp; | &nbsp;&nbsp; Implementação e Exploração de Bases de Dados &nbsp;&nbsp; | &nbsp;&nbsp; David Valente nº8 12ITM1</div>
+    </header>
+
+    <!--INTRODUÇÃO-->
+    <section>
+        <h2>Introdução</h2>
+        <hr>
+        <p>Neste trabalho estão documentados diversos conceitos/comandos de SQL necessários para a manutenção de uma base de dados.</p>
+        <p>A estrutura consiste em vários <i>cards</i> que contém informação sobre cada comando: o que faz, a sua sintaxe e exemplos práticos da sua utilização. Estes exemplos serão realizados no Supabase, Sistema Gestor de Base de Dados (SGBD) relacional, cuja <i>engine</i> é PostgreSQL, outro SGBD relacional.</p>
+        <p>
+            <b>NOTA: 
+                <ul>
+                    <li>Não estão presentes todos os conceitos e comandos de SQL, apenas o necessário para a realização da disciplina de Implementação e Exploração de Bases de Dados;</li>
+                    <li>Os exemplos podem mostrar falhas ao nível da normalização de dados.</li>
+                </ul>
+            </b>
+        </p>
+        <br>
+    </section>
+    <!--FIM-->
+
+    <section>
+        <h4><i>ENQUADRAMENTO TEÓRICO</i></h4>
+        <hr>
+
+        <!--ACORDIÃO ENQUADRAMENTO TEÓRICO-->
+        <button class="accordion"><b>Enquadramento Teórico</b> &rightarrow; Structured Query Language, as suas características e vantagens.</button>
+        <!--INICIO-->
+        <div class="panel">
+            <section>
+                <div class="content">
+                    <div class="text">
+                        <h2>Structured Query Language</h2>
+                        <hr>
+                        <p style="text-align: justify;">Structured Query Language, normalmente designada por SQL, é uma linguagem de programação concebida para gerir e manipular bases de dados relacionais. O seu desenvolvimento teve início na década de 1970 pela IBM. A consequente evolução atribuiu à linguagem um estatuto universal, tornando-se parte fundamental dos Sistemas Gestores de Bases de Dados (SGBD) e, portanto, utilizada em vários sectores para o tratamento de dados.</p>
+                        <p style="text-align: justify;">A linguagem SQL fornece um conjunto abrangente de comandos, ou <i>queries</i> (plural de <i>query</i>), para executar diversas tarefas, tais como: consultar, inserir, atualizar e apagar dados; criar e modificar esquemas de bases de dados e controlar acessos.</p>
+                        <p style="text-align: justify;">A universalidade do SQL deve-se à sua simplicidade e versatilidade na interação independente da plataforma, ou seja, permite trabalhar com diferentes SGBD's através do mesmo código. </p>
+                    </div>
+                    <div class="image">
+                        <img src="imgs/logos/sql_logo.png" alt="Descrição da imagem" style="border: 1px solid black;">
+                    </div>
+                </div>
+            </section>
+        </div>
+        <!--FIM-->
+
+        <h4><i>GESTÃO DE TABELAS</i></h4>
+        <hr>
+
+        <!--ACORDIÃO TABELAS-->
+        <button class="accordion"><b>Tabelas</b> &rightarrow; Comandos para criação, alteração e eliminiação de tabelas.</button>
+        <!--INICIO-->
+        <div class="panel">
+            <!--CREATE TABLE-->
+            <section>
+                <h2>CREATE TABLE</h2>
+                <p>O comando <code>CREATE TABLE</code> é utilizado para criar uma tabela. A tabela pode ser criada como nova, identificando assim as colunas pertencentes e o respetivo tipo de dados, ou a partir de outra tabela já existente, através do comando <code>CREATE TABLE SELECT</code>.</p>
+                <hr>
+
+                <!--SINTAXE CREATE TABLE-->
+                <h4>SINTAXE &rightarrow; CREATE TABLE</h4>
+                <section>
+                    <code style="display: block;">
+                        CREATE TABLE [tabela] (<br>
+                            &nbsp;&nbsp;[coluna] [tipo],<br>
+                            &nbsp;&nbsp;[coluna] [tipo],<br>
+                            &nbsp;&nbsp;[coluna] [tipo],<br>
+                            &nbsp;&nbsp;...<br>
+                            );
+                    </code>
+                </section>
+                <hr>
+                <!--FIM CREATE TABLE-->
+
+                <!--SINTAXE CREATE TABLE SELECT-->
+                <h4>SINTAXE &rightarrow; CREATE TABLE + SELECT</h4>
+                <section>
+                    <code style="display: block;">
+                        CREATE TABLE [tabela] AS <br>
+                        SELECT [coluna], [coluna], ... <br>
+                        FROM [tabela_existente];
+                    </code>
+                </section>
+                <!--FIM CREATE TABLE SELECT-->
+
+                <!--NOTA-->
+                <section>
+                    <b>
+                        <li>O <code>SELECT</code> funciona como uma consula normal, ou seja, pode ser usado <code>*</code> para selecionar todas as colunas;</li>
+                        <li>Este comando apenas copia nome e tipo de dados, não copia restrições.</li>
+                    </b>
+                </section>
+                <!--FIM-->
+            </section>
+            <!--FIM-->
+
+            <!--ALTER TABLE-->
+            <section>
+                <h2>ALTER TABLE</h2>
+                <p>O comando <code>ALTER TABLE</code> permite alterar estrutura da tabela: criar/eliminar colunas (<code>ADD</code> e <code>DROP COLUMN</code>), alterar nomes (<code>RENAME COLUMN</code>) e tipos de dados das colunas (<code>ALTER/MODIFY COLUMN</code>). Este último exemplo pode variar a sintaxe consoante o SGBD utilizado.</p>
+                <hr>
+
+                <!--SINTAXE ALTER TABLE ADD COLUMN-->
+                <h4>SINTAXE &rightarrow; ADD (COLUMN)</h4>
+                <section>
+                    <code style="display: block;">
+                        ALTER TABLE [tabela]<br>
+                        ADD [coluna] [tipo];
+                    </code>
+                </section>
+                <!--FIM ALTER TABLE ADD COLUMN-->
+
+                <hr>
+
+                <!--SINTAXE ALTER TABLE RENAME COLUMN-->           
+                <h4>SINTAXE &rightarrow; RENAME COLUMN</h4>
+                <section>
+                    <code style="display: block;">
+                        ALTER TABLE [tabela]<br>
+                        RENAME COLUMN [nome_antigo] TO [nome_novo];
+                    </code>
+                </section>
+                <!--FIM ALTER TABLE RENAME COLUMN-->
+
+                <hr>
+
+                <!--SINTAXE ALTER TABLE ALTER/MODIFY COLUMN-->
+                <h4>SINTAXE &rightarrow; ALTER/MODIFY COLUMN</h4>
+                <section>
+                    <h5>Access | SQL Server</h5>
+                    <code style="display: block;">
+                        ALTER TABLE [tabela]<br>
+                        ALTER COLUMN [coluna] [tipo_novo];
+                    </code>
+                    <br>
+                    <h5>MySQL</h5>
+                    <code style="display: block;">
+                        ALTER TABLE [tabela]<br>
+                        MODIFY COLUMN [coluna] TYPE [tipo_novo];
+                    </code>
+                    <br>
+                    <h5>Oracle (Versão 10+)</h5>
+                    <code style="display: block;">
+                        ALTER TABLE [tabela]<br>
+                        MODIFY ([coluna] [tipo_novo]);
+                    </code>
+                    <p><b>OBSERVAÇÃO: Em Oracle, não é estritamente necessária a utilização de parêntesis, embora seja uma boa prática.</b></p>
+                    <br>
+                    <h5>PostgreSQL</h5>
+                    <code style="display: block;">
+                        ALTER TABLE [tabela]<br>
+                        ALTER COLUMN [coluna] TYPE [tipo_novo];
+                    </code>
+                </section>
+                <!--FIM ALTER TABLE MODIFY COLUMN-->
+
+                <!--NOTA-->
+                <section>
+                    <b>
+                        <li>As sintaxes em Access e SQL Server, MySQL e Oracle poderão não estar corretas.</li>
+                        <li>A troca de tipos de dados apresentada é feita dentro da mesma categoria. Exemplificando, caso a coluna seja do tipo inteiro, só pode ser trocado diretamente para um tipo numérico.</li>
+                    </b>        
+                </section>
+                <!--FIM-->
+
+                <hr>
+
+                <!--SINTAXE ALTER TABLE DROP COLLUMN-->
+                <h4>SINTAXE &rightarrow; DROP COLUMN</h4>
+                <section>
+                    <code style="display: block;">
+                        ALTER TABLE [tabela]<br>
+                        DROP COLUMN [coluna];
+                    </code>
+                </section>
+                <!--FIM ALTER TABLE DROP COLUMN-->
+            </section>
+            <!--FIM-->
+
+            <!--DROP TABLE-->
+            <section>
+                <h2>DROP TABLE</h2>
+                <p>O comando <code>DROP TABLE</code> elimina permanentemente uma tabela.</p>
+                <hr>
+
+                <!--SINTAXE DROP TABLE-->
+                <h4>SINTAXE &rightarrow; DROP TABLE</h4>
+                <section>
+                    <code style="display: block;">
+                        DROP TABLE [tabela];
+                    </code>
+                </section>
+                <!--FIM DROP TABLE-->
+            </section>
+            <!--FIM-->
+        </div>
+        <!--FIM-->
+
+        <!--ACORDIÃO CHAVES-->
+        <button class="accordion"><b>Chaves</b> &rightarrow; Criar, alterar e eliminar chaves primárias e estrangeiras.</button>
+        <!--INICIO-->
+        <div class="panel">
+            <!--PRIMARY KEY-->
+            <section>
+                <h2>PRIMARY KEY</h2>
+                <p>A <code>PRIMARY KEY</code>, ou chave primária, é um valor <b>único</b> e <b>não nulo</b> que identifica de forma única um registo de uma tabela. Cada tabela pode ter apenas uma chave primária, que pode ser simples ou composta, sendo constituída por uma ou várias colunas, respetivamente.</p>
+                <hr>
+
+                <h4>SINTAXE &rightarrow; PRIMARY KEY + CREATE TABLE</h4>
+                <!--SINTAXE PRIMARY KEY SIMPLES AO CRIAR TABELA -->
+                <section>
+                    <h4>SINTAXE &rightarrow; CHAVE PRIMÁRIA SIMPLES</h4>     
+                    <section>
+                        <code style="display: block;">
+                            CREATE TABLE [tabela] (<br>
+                                &nbsp;&nbsp;[coluna_chave] [tipo] PRIMARY KEY,<br>
+                                &nbsp;&nbsp;[coluna] [tipo],<br>
+                                &nbsp;&nbsp;[coluna] [tipo],<br>
+                                &nbsp;&nbsp;...,<br>
+                                );
+                        </code>
+                        <br>
+                        <code style="display: block;">
+                            CREATE TABLE [tabela] (<br>
+                            &nbsp;&nbsp;[coluna_chave] [tipo],<br>
+                            &nbsp;&nbsp;[coluna] [tipo],<br>
+                            &nbsp;&nbsp;[coluna] [tipo],<br>
+                            &nbsp;&nbsp;...<br>
+                            &nbsp;&nbsp;PRIMARY KEY ([coluna_chave]),<br>
+                            );
+                        </code>
+                        <p><b>OBSERVAÇÃO: Ambos os comandos retornam o mesmo resultado, diferenciando apenas o local da declaração da chave primária.</b></p>
+                    </section>
+                </section>
+                <!--FIM-->
+                
+                <!--SINTAXE PRIMARY KEY COMPOSTA AO CRIAR TABELA -->
+                <section>
+                    <h4>SINTAXE &rightarrow; CHAVE PRIMÁRIA COMPOSTA</h4>
+                    <section>
+                        <code style="display: block;">
+                            CREATE TABLE [tabela] (<br>
+                            &nbsp;&nbsp;[coluna_chave_1] [tipo],<br>
+                            &nbsp;&nbsp;[coluna_chave_2] [tipo],<br>
+                            &nbsp;&nbsp;[coluna] [tipo],<br>
+                            &nbsp;&nbsp;...,<br>
+                            &nbsp;&nbsp;PRIMARY KEY ([coluna_chave_1], [coluna_chave_2]);<br>
+                            );
+                        </code>
+                    </section>
+                </section>
+                <!--FIM-->
+
+                <!--SINTAXE PRIMARY KEY COM NOME AO CRIAR TABELA -->
+                <section>
+                    <h4>SINTAXE &rightarrow; CHAVE PRIMÁRIA COM NOME</h4>
+                    <section>
+                        <code style="display: block;">
+                            CREATE TABLE [tabela] (<br>
+                            &nbsp;&nbsp;[coluna_chave] [tipo],<br>
+                            &nbsp;&nbsp;[coluna] [tipo],<br>
+                            &nbsp;&nbsp;[coluna] [tipo],<br>
+                            &nbsp;&nbsp;...,<br>
+                            &nbsp;&nbsp;CONSTRAINT [nome_chave] PRIMARY KEY ([coluna_chave]);<br>
+                            );
+                        </code>
+                        <p><b>OBSERVAÇÃO: Este comando pode ser usado para atribuir chaves primárias simples e compostas, basta colocar as colunas desejadas.</b></p>
+                    </section>
+                </section>
+                <!--FIM-->
+
+                <!--NOTA-->
+                <section>               
+                    <b>
+                        <li>Sintaxe em Access, MySQL, SQL Server e Oracle não foi testada;</li>
+                        <li>O nome padrão da chave primária muda consoante o SGBD. Exemplificando, para uma tabela <i>aluno</i>, em PostgreSQL o nome padrão é <code>aluno_pkey</code>, e em SQL Server e Oracle é <code>aluno_PK</code>.</li>
+                    </b>
+                </section>
+                <!--FIM-->
+
+                <hr>
+         
+                <h4>SINTAXE &rightarrow; PRIMARY KEY + ALTER TABLE</h4>
+                <!--SINTAXE ADICIONAR PRIMARY KEY SIMPLES AO ALTERAR TABELA-->
+                <section>
+                    <h4>SINTAXE &rightarrow; CHAVE PRIMÁRIA SIMPLES</h4>
+                    <section>
+                        <code style="display: block;">
+                            ALTER TABLE [tabela] <br>
+                            ADD PRIMARY KEY ([coluna_chave]);
+                        </code>
+                    </section>
+                </section>
+                <!--FIM SINTAXE-->
+
+                <!--SINTAXE ADICIONAR PRIMARY KEY COMPOSTA OU NOMEAR AO ALTERAR TABELA-->
+                <section>
+                    <h4>SINTAXE &rightarrow; CHAVE PRIMÁRIA COMPOSTA | CHAVE PRIMÁRIA COM NOME</h4>
+                    <section>
+                        <code style="display: block;">
+                            ALTER TABLE [tabela] <br>
+                            ADD CONSTRAINT [nome_chave] PRIMARY KEY ([coluna_chave_1], [coluna_chave_2]);
+                        </code>
+                        <p><b>OBSERVAÇÃO: Este comando pode ser usado para atribuir chaves primárias simples e compostas, basta colocar as colunas desejadas.</b></p>
+                    </section>
+                </section>
+                <!--FIM SINTAXE-->
+
+                <!--NOTA-->
+                <section>
+                    <b>
+                        <li>Só pode existir uma única chave primária por tabela. Caso já exista, é recomendável eliminá-la ou então atribuir à coluna as <i>constraints</i> <code>UNIQUE</code> e <code>NOT NULL</code>;</li>
+                        <li>Este comando não cria nova(s) coluna(s), portanto, é requisito as colunas mencionadas existirem na tabela.</li>
+                    </b>
+                </section>
+                <!--FIM NOTA-->
+
+                <!--SINTAXE ELIMINAR PRIMARY KEY SIMPLES OU COMPOSTA AO ALTERAR TABELA-->
+                <section>
+                    <h4>SINTAXE &rightarrow; ELIMINAR CHAVE PRIMÁRIA</h4>
+                    <section>
+                        <h5>Access | SQL Server | Oracle | PostgreSQL</h5>
+                        <code style="display: block;">
+                            ALTER TABLE [tabela] <br>
+                            DROP CONSTRAINT [nome_chave];
+                        </code>
+                        <br>
+                        <h5>MySQL</h5>
+                        <code style="display: block;">
+                            ALTER TABLE [tabela] <br>
+                            DROP PRIMARY KEY;
+                        </code>
+                    </section>
+                </section>
+                <!--FIM SINTAXE-->
+
+                <!--NOTA-->
+                <section>
+                    <b>
+                        <li>Sintaxe em Access, MySQL, SQL Server e Oracle não foi testada;</li>
+                        <li>Este comando não elimina coluna(s), apenas apaga a <i>constraint</i> <code>PRIMARY KEY</code>.</li>
+                    </b>
+                </section>
+                <!--FIM NOTA-->
+            </section>
+
+            <!--FOREIGN KEY-->
+            <section>
+                <h2>FOREIGN KEY</h2>
+                <p>A <code>FOREIGN KEY</code>, ou chave estrangeira, é um valor que identifica, a partir de uma tabela, um registo de uma tabela relacionada. A chave estrangeira funciona também como protetora de relações, para que estas não sejam afetadas criticamente durante operações de base de dados. O tipo de dados da chave estrangeira deve coincidir com a coluna relacionada.</p>
+                <p>Para além disso, a chave estrangeria é especialmente útil no processo de normalização de bases de dados.</p>
+                <hr>
+
+                <h4>SINTAXE &rightarrow; FOREIGN KEY + CREATE TABLE</h4>
+                <!--SINTAXE UMA FOREIGN KEY AO CRIAR TABELA-->
+                <section>
+                    <h4>SINTAXE &rightarrow; CHAVE ESTRANGEIRA</h4>
+                    <section>
+                        <code style="display: block;">
+                            CREATE TABLE [tabela] (<br>
+                                &nbsp;&nbsp;[coluna_chave] [tipo] PRIMARY KEY,<br>
+                                &nbsp;&nbsp;[coluna_chave_estrangeira] [tipo] FOREIGN KEY REFERENCES [tabela_relacionada]([coluna_unica]),<br>
+                                &nbsp;&nbsp;[coluna_chave] [tipo],<br>
+                                &nbsp;&nbsp;...,<br>
+                                );
+                        </code>
+                        <br>
+                        <code style="display: block;">
+                            CREATE TABLE [tabela] (<br>
+                                &nbsp;&nbsp;[coluna_chave] [tipo],<br>
+                                &nbsp;&nbsp;[coluna_chave_estrangeira] [tipo],<br>
+                                &nbsp;&nbsp;...,<br>
+                                &nbsp;&nbsp;PRIMARY KEY ([coluna_chave]),<br>
+                                &nbsp;&nbsp;FOREIGN KEY ([coluna_chave_estrangeira]) REFERENCES [tabela_relacionada]([coluna_unica])<br>
+                                );
+                        </code>
+                        <p><b>OBSERVAÇÃO: Ambos os comandos retornam o mesmo resultado, diferenciando apenas o local da declaração da chave estrangeira.</b></p>
+                    </section>
+                </section>
+                <!--FIM SINTAXE-->
+
+                <!--SINTAXE FOREIGN KEY COM NOME-->
+                <section>
+                    <h4>SINTAXE &rightarrow; CHAVE ESTRANGEIRA COM NOME</h4>
+                    <section>
+                        <code style="display: block;">
+                            CREATE TABLE [tabela] (<br>
+                                &nbsp;&nbsp;[coluna_chave] [tipo],<br>
+                                &nbsp;&nbsp;[coluna_chave_estrangeira] [tipo],<br>
+                                &nbsp;&nbsp;[coluna_chave_estrangeira_2] [tipo],<br>
+                                &nbsp;&nbsp;...,<br>
+                                &nbsp;&nbsp;PRIMARY KEY ([coluna_chave])<br>
+                                &nbsp;&nbsp;CONSTRAINT [nome_chave] FOREIGN KEY ([coluna_chave_estrangeira]) REFERENCES [tabela_relacionada]([coluna_unica]),<br>
+                                );
+                        </code>
+                    </section>
+                </section>
+                <!--FIM SINTAXE-->
+
+                <hr>
+
+                <h4>SINTAXE &rightarrow; FOREIGN KEY + ALTER TABLE</h4>
+                <!--SINTAXE ADICIONAR FOREIGN KEY AO ALTERAR TABELA-->
+                <section>
+                    <h4>SINTAXE &rightarrow; CHAVE ESTRANGEIRA</h4>
+                    <section>
+                        <code style="display: block;">
+                            ALTER TABLE [tabela] <br>
+                            ADD FOREIGN ([coluna_chave_estrangeira]) REFERENCES [tabela_relacionada]([coluna_unica]);
+                        </code>
+                        <p><b>OBSERVAÇÃO: Podem ser atribuídas múltiplas chaves estrangeiras, repetindo a expressão <code>ADD</code>.</b></p>
+                    </section>             
+                </section>
+                <!--FIM SINTAXE-->
+
+                <!--SINTAXE FOREIGN KEY COM NOME AO ALTERAR TABELA-->
+                <section>
+                    <h4>SINTAXE &rightarrow; CHAVE ESTRANGEIRA COM NOME</h4>
+                    <section>
+                        <code style="display: block;">
+                            ALTER TABLE [tabela] <br>
+                            ADD CONSTRAINT [nome_chave] FOREIGN KEY ([coluna_chave_estrangeira]) REFERENCES [tabela_relacionada]([coluna_unica]);
+                        </code>
+                    </section>
+                </section>
+                <!--FIM SINTAXE-->
+
+                <!--NOTA-->
+                <section>
+                    <b>
+                        <li>Este comando não cria nova(s) coluna(s), portanto, é requisito as colunas mencionadas existirem na tabela.</li>
+                    </b>
+                </section>
+                <!--FIM NOTA-->
+
+                <!--SINTAXE ELIMINAR FOREIGN KEY SIMPLES OU COMPOSTA AO ALTERAR TABELA-->
+                <section>
+                    <h4>SINTAXE &rightarrow; ELIMINAR CHAVE ESTRANGEIRA</h4>
+                    <section>
+                        <h5>Access | SQL Server | Oracle | PostgreSQL</h5>
+                        <code style="display: block;">
+                            ALTER TABLE [tabela] <br>
+                            DROP CONSTRAINT [nome_chave];
+                        </code>
+                        <br>
+                        <h5>MySQL</h5>
+                        <code style="display: block;">
+                            ALTER TABLE [tabela] <br>
+                            DROP FOREIGN KEY [nome_chave];
+                        </code>
+                    </section>
+                </section>
+                <!--FIM SINTAXE-->
+
+                <!--NOTA-->
+                <section>
+                    <b>
+                        <li>Sintaxe em Access, MySQL, SQL Server e Oracle não foi testada;</li>
+                        <li>Este comando não elimina coluna(s), apenas apaga a <i>constraint</i> <code>FOREIGN KEY</code>.</li>
+                    </b>
+                </section>
+                <!--FIM NOTA-->
+            </section>
+            <!--FIM-->
+        </div>
+        <!--FIM-->
+
+        <!--ACORDIÃO CONSTRAINTS-->
+        <button class="accordion"><b>Constraints</b> &rightarrow; Restrições aplicadas às colunas de uma tabela.</button>
+        <!--INICIO-->
+        <div class="panel">
+            <!--CONSTRAINTS-->
+            <section>
+                <h2>CONSTRAINTS</h2>
+                <hr>
+                <p><i>Constraints</i> são restrições que podem ser aplicadas às colunas de uma tabela, durante a sua criação ou alteração. Em caso de alteração de tabelas, mais concretamente as colunas, não são criadas/eliminas colunas, mas sim as suas restrições.</p>
+                <p><b>OBSERVAÇÃO: As <i>constraints</i> <code>PRIMARY KEY</code>, <code>FOREIGN KEY</code> e <code>CREATE INDEX</code> são exploradas mais a fundo nas categorias <u>Chaves</u>, para as duas primeiras, e <u>Índices</u>, para a última</b>.</p>    
+            </section>
+            <!--FIM-->
+
+            <!--CONSTRAINT NOT NULL-->
+            <section>
+                <h2>CONSTRAINT NOT NULL</h2>
+                <p>A <i>constraint</i> <code>NOT NULL</code> impede a coluna de assumir o valor nulo (<i>NULL</i>).</p>
+                <hr>
+
+                <!--SINTAXE NOT NULL CREATE TABLE-->
+                <h4>SINTAXE &rightarrow; NOT NULL + CREATE TABLE</h4>
+                <section>
+                    <code style="display: block;">
+                        CREATE TABLE [tabela] (<br>
+                            &nbsp;&nbsp;[coluna] [tipo] NOT NULL,<br>
+                            &nbsp;&nbsp;...<br>
+                            );
+                    </code>
+                </section>
+                <!--FIM-->
+
+                <hr>
+
+                <!--SINTAXE NOT NULL ALTER TABLE-->
+                <h4>SINTAXE &rightarrow; NOT NULL + ALTER TABLE</h4>
+                <section>
+                    <h5>Access | SQL Server</h5>
+                    <code style="display: block;">
+                        ALTER TABLE [tabela] <br>
+                        ALTER COLUMN [coluna] [tipo] NOT NULL;
+                    </code>
+                    <br>
+                    <h5>MySQL</h5>
+                    <code style="display: block;">
+                        ALTER TABLE [tabela] <br>
+                        MODIFY COLUMN [coluna] [tipo] NOT NULL;
+                    </code>
+                    <br>
+                    <h5>Oracle (Versão 10+)</h5>
+                    <code style="display: block;">
+                        ALTER TABLE [tabela] <br>
+                        MODIFY [coluna] [tipo] NOT NULL;
+                    </code>
+                    <br>
+                    <h5>PostgreSQL</h5>
+                    <code style="display: block;">
+                        ALTER TABLE [tabela] <br>
+                        ALTER COLUMN [coluna] SET NOT NULL;
+                    </code>
+                </section>
+                <!--FIM-->
+
+                <!--NOTA-->
+                <section>
+                    <b>
+                        <li>Excluindo o PostgreSQL, a sintaxe apresentada pode ser utilizada para remover a <i>constraint</i> <code>NOT NULL</code>, omitindo essa mesma expressão, já que o comando reescreve a coluna;</li>
+                        <li>Em PostgreSQL, para eliminar a <i>constraint</i> <code>NOT NULL</code>, basta substituir a palavra-chave <code>SET</code> por <code>DROP</code>.</li>
+                    </b>
+                </section>
+                <!--FIM-->
+            </section>
+            <!--FIM-->
+
+            <!--CONSTRAINT UNIQUE-->
+            <section>
+                <h2>CONSTRAINT UNIQUE</h2>
+                <p>A <i>constraint</i> <code>UNIQUE</code> impede a coluna de assumir valores repetivos, tornando-a única.</p>
+                <hr>
+
+                <h4>SINTAXE &rightarrow; UNIQUE + CREATE TABLE</h4>
+                <!--SINTAXE UNIQUE SIMPLES CREATE TABLE-->
+                <section>
+                    <h4>SINTAXE &rightarrow; UNIQUE SIMPLES</h4>
+                    <section>
+                        <code style="display: block;">
+                            CREATE TABLE [tabela] (<br>
+                            &nbsp;&nbsp;[coluna_chave] [tipo] UNIQUE,<br>
+                            &nbsp;&nbsp;...<br>
+                            );
+                        </code>
+                        <br>
+                        <code style="display: block;">
+                            CREATE TABLE [tabela] (<br>
+                            &nbsp;&nbsp;[coluna_chave] [tipo],<br>
+                            &nbsp;&nbsp;...<br>
+                            &nbsp;&nbsp;UNIQUE ([coluna_chave]),<br>
+                            );
+                        </code>
+                        <p><b>OBSERVAÇÃO: Ambos os comandos retornam o mesmo resultado, diferenciando apenas o local da declaração da <i>constraint</i> <code>UNIQUE</code>.</b></p>
+                    </section>
+                </section>
+                <!--FIM-->
+
+                <!--SINTAXE UNIQUE COMPOSTO E COM NOME CREATE TABLE-->
+                <section>
+                    <h4>SINTAXE &rightarrow; UNIQUE COMPOSTO | UNIQUE COM NOME</h4>
+                    <section>
+                        <code style="display: block;">
+                            CREATE TABLE [tabela] (<br>
+                            &nbsp;&nbsp;[coluna_chave_1] [tipo],<br>
+                            &nbsp;&nbsp;[coluna_chave_2] [tipo],<br>
+                            &nbsp;&nbsp;...<br>
+                            &nbsp;&nbsp;CONSTRAINT [nome_chave] UNIQUE ([coluna_chave_1], [coluna_chave_2])<br>
+                            );
+                        </code>
+                        <p><b>OBSERVAÇÃO: Ao atribuir uma <i>constraint</i> <code>UNIQUE</code> composta será criada uma restrição na qual a combinação das colunas selecionadas deve ser única.</b></p>
+                    </section>
+                </section>
+                <!--FIM-->
+
+                <hr>
+
+                <!--SINTAXE UNIQUE SIMPLES ALTER TABLE-->
+                <h4>SINTAXE &rightarrow; UNIQUE + ALTER TABLE</h4>
+                <section>
+                    <h4>SINTAXE &rightarrow; UNIQUE SIMPLES</h4>
+                    <section>
+                        <h5>Access</h5>
+                        <code style="display: block;">
+                            ALTER TABLE [tabela] <br>
+                            ADD CONSTRAINT [nome_restrição] UNIQUE ([coluna]);
+                        </code>
+                        <br>
+                        <h5>MySQL | SQL Server | Oracle | PostgreSQL</h5>
+                        <code style="display: block;">
+                            ALTER TABLE [tabela] <br>
+                            ADD UNIQUE ([coluna]);
+                        </code>
+                    </section>
+                </section>
+                <!--FIM-->
+
+                <!--SINTAXE UNIQUE COM NOME ALTER TABLE-->
+                <section>
+                    <h4>SINTAXE &rightarrow; UNIQUE COMPOSTO | UNIQUE COM NOME</h4>
+                    <section>
+                        <code style="display: block;">
+                            ALTER TABLE [tabela] <br>
+                            ADD CONSTRAINT [nome_chave] UNIQUE ([coluna_chave_1], [coluna_chave_2]);
+                        </code>
+                    </section>
+                </section>
+                <!--FIM-->
+
+                <!--SINTAXE UNIQUE ELIMINAR ALTER TABLE-->
+                <section>
+                    <h4>SINTAXE &rightarrow; ELIMINAR UNIQUE</h4>
+                    <section>
+                        <h5>Access | SQL Server | Oracle | PostgreSQL</h5>
+                        <code style="display: block;">
+                            ALTER TABLE [tabela] <br>
+                            DROP CONSTRAINT [nome_chave];
+                        </code>
+                        <br>
+                        <h5>MySQL</h5>
+                        <code>
+                            ALTER TABLE [tabela] <br>
+                            DROP INDEX [nome_chave];
+                        </code>
+                    </section>
+                </section>
+                <!--FIM-->
+            </section>
+            <!--FIM-->
+
+            <!--CONSTRAINT CHECK-->
+            <section>
+                <h2>CONSTRAINT CHECK</h2>
+                <p>A <i>constraint</i> <code>CHECK</code> assegura que o valor de uma coluna segue uma determinada condição. </p>
+                <hr>
+
+                <h4>SINTAXE &rightarrow; CHECK + CREATE TABLE</h4>
+                <!--SINTAXE CHECK CREATE TABLE-->
+                <section>
+                    <h4>SINTAXE &rightarrow; CHECK SIMPLES</h4>
+                    <section>
+                        <code style="display: block;">
+                        CREATE TABLE [tabela] (<br>
+                            &nbsp;&nbsp;[coluna] [tipo] CHECK ([condição]),<br>
+                            &nbsp;&nbsp;...<br>
+                            );
+                        </code>
+                        <br>
+                        <code style="display: block;">
+                            CREATE TABLE [tabela] (<br>
+                            &nbsp;&nbsp;[coluna] [tipo], <br>
+                            &nbsp;&nbsp;..., <br>
+                            &nbsp;&nbsp;CHECK ([condição])<br>
+                            );
+                        </code>
+                        <br>
+                        <p><b>OBSERVAÇÃO: Ambos os comandos retornam o mesmo resultado, diferenciando apenas o local da declaração da constraint <code>CHECK</code>.</b></p>
+                    </section>
+                </section>
+                <!--FIM-->
+
+                <!--SINTAXE CHECK COM NOME CREATE TABLE-->
+                <section>
+                    <h4>SINTAXE &rightarrow; CHECK COMPOSTO | CHECK COM NOME</h4>
+                    <section>
+                        <code style="display: block;">
+                            CREATE TABLE [tabela] (<br>
+                                &nbsp;&nbsp;[coluna] [tipo],<br>
+                                &nbsp;&nbsp;...,<br>
+                                &nbsp;&nbsp;CONSTRAINT [nome_chave] CHECK ([condição] [operador] [condição])<br>
+                                );
+                        </code>
+                    </section>
+                </section>
+                <!--FIM-->
+
+                <hr>
+
+                <h4>SINTAXE &rightarrow; CHECK + ALTER TABLE</h4>
+                <!--SINTAXE CHECK ALTER TABLE-->
+                <section>
+                    <h4>SINTAXE &rightarrow; CHECK SIMPLES</h4>
+                    <section>
+                        <code style="display: block;">
+                            ALTER TABLE [tabela] <br>
+                            ADD CHECK ([condição]);
+                        </code>
+                    </section>
+                </section>
+                <!--FIM-->
+
+                <!--SINTAXE CHECK COM NOME ALTER TABLE-->
+                <section>
+                    <h4>SINTAXE &rightarrow; CHECK COMPOSTO | CHECK COM NOME</h4>
+                    <section>
+                        <code style="display: block;">
+                            ALTER TABLE [tabela] <br>
+                            ADD CONSTRAINT [nome_chave] CHECK ([condição_1] [operador] [condição_2]);
+                        </code>
+                    </section>
+                </section>
+                <!--FIM-->
+
+                <!--SINTAXE CHECK ELIMINAR ALTER TABLE-->
+                <section>
+                    <h4>SINTAXE &rightarrow; ELIMINAR CHECK</h4>
+                    <section>
+                        <h5>Access | SQL Server | Oracle | PostgreSQL</h5>
+                        <code style="display: block;">
+                            ALTER TABLE [tabela] <br>
+                            DROP CONSTRAINT [nome_chave];
+                        </code>
+                        <br>
+                        <h5>MySQL</h5>
+                        <code style="display: block;">
+                            ALTER TABLE [tabela] <br>
+                            DROP CHECK [nome_chave];
+                        </code>
+                    </section>
+                </section>
+                <!--FIM-->
+
+            </section>
+            <!--FIM-->
+
+            <!--CONSTRAINT DEFAULT-->
+            <section>
+                <h2>CONSTRAINT DEFAULT</h2>
+                <p>A <i>constraint</i> <code>DEFAULT</code> aufere à coluna um valor padrão.</p>
+                <hr>
+
+                <!--SINTAXE DEFAULT CREATE TABLE-->
+                <h4>SINTAXE &rightarrow; DEFAULT + CREATE TABLE</h4>
+                <section>
+                    <h4>SINTAXE &rightarrow; DEFAULT</h4>
+                    <section>
+                        <code style="display: block;">
+                            CREATE TABLE [tabela] (<br>
+                            &nbsp;&nbsp;[coluna] [tipo] DEFAULT [valor_padrão],<br>
+                            &nbsp;&nbsp;...<br>
+                            );
+                        </code>
+                    </section>
+                </section>
+                <!--FIM-->
+
+                <hr>
+
+                <!--SINTAXE DEFAULT ALTER TABLE-->
+                <h4>SINTAXE &rightarrow; DEFAULT + ALTER TABLE</h4>
+                <section>
+                    <h4>SINTAXE &rightarrow; DEFAULT</h4>
+                    <section>
+                        <h5>Access | MySQL | PostgreSQL</h5>
+                        <code style="display: block;">
+                            ALTER TABLE [tabela] <br>
+                            ALTER COLUMN [coluna] SET DEFAULT [valor_padrão];
+                        </code>
+                        <br>    
+                        <h5>MySQL</h5>
+                        <code style="display: block;">
+                            ALTER TABLE [tabela] <br>
+                            ALTER [coluna] SET DEFAULT [valor_padrão];
+                        </code>
+                        <br> 
+                        <h5>SQL Server</h5>
+                        <code style="display: block;">
+                            ALTER TABLE [tabela] <br>
+                            ADD CONSTRAINT [nome_chave] <br>
+                            DEFAULT [valor_padrão] FOR [coluna];
+                        </code>
+                        <br>    
+                        <h5>Oracle</h5>
+                        <code style="display: block;">
+                            ALTER TABLE [tabela] <br>
+                            MODIFY [coluna] DEFAULT [valor_padrão];
+                        </code>
+                    </section>
+                </section>
+                <!--FIM-->
+
+                <hr>
+
+                <!--SINTAXE DEFAULT ELIMINAR ALTER TABLE-->
+                <section>
+                    <h4>SINTAXE &rightarrow; ELIMINAR DEFAULT</h4>
+                    <section>
+                        <h5>Access | SQL Server | Oracle | PostgreSQL</h5>
+                        <code style="display: block;">
+                            ALTER TABLE [tabela] <br>
+                            ALTER COLUMN [coluna] DROP DEFAULT;
+                        </code>
+                        <br>
+                        <h5>MySQL</h5>
+                        <code style="display: block;">
+                            ALTER TABLE [tabela] <br>
+                            ALTER [coluna] DROP DEFAULT;
+                        </code>
+                    </section>
+                </section>
+                <!--FIM-->
+            </section>
+            <!--FIM-->
+
+            <!--CONSTRAINT PRIMARY KEY-->
+            <section>
+                <h2>CONSTRAINT PRIMARY KEY</h2>
+                <p>A <i>constraint</i> <code>PRIMARY KEY</code> torna a coluna em chave primária.</p>              
+            </section>
+            <!--FIM-->
+
+            <!--CONSTRAINT FOREIGN KEY-->
+            <section>
+                <h2>CONSTRAINT FOREIGN KEY</h2>
+                <p>A <i>constraint</i> <code>FOREIGN KEY</code> cria uma proteção que impede que ações na base de dados afetem ligação de colunas de tabelas diferentes, tornando a coluna numa chave estrangeira.</p>
+            </section>
+            <!--FIM-->
+
+            <!--CONSTRAINT CREATE INDEX-->
+            <section>
+                <h2>CONSTRAINT CREATE INDEX</h2>
+                <p>A <i>constraint</i> <code>CREATE INDEX</code> cria um índice numa determinada coluna.</p>
+            </section>
+            <!--FIM-->
+        </div>
+        <!--FIM-->
+
+        <!--ACORDIÃO EXEMPLOS-->
+        <button class="accordion"><b>Exemplos</b> &rightarrow; Exemplificação dos conceitos abordados nesta categoria.</button>
+        <!--INICIO-->
+        <div class="panel">
+            <!--EXEMPLO 1-->
+            <section>
+                <h2>EXEMPLO #1 &rightarrow; CRIAÇÃO DE TABELAS</h2>
+                <p>Criação das tabelas <code>curso</code> e <code>aluno</code> e duas cópias desta última tabela: <code>enc_educacao</code> e <code>aluno_copia</code>.</p>
+                <hr>
+
+                <!--CRIAÇÃO TABELA ALUNO-->
+                <h4>COMANDO &rightarrow; TABELA ALUNO</h4>
+                <section>
+                    <code style="display: block;">
+                        CREATE TABLE aluno (<br>
+                        &nbsp;&nbsp;id_aluno BIGINT PRIMARY KEY,<br>
+                        &nbsp;&nbsp;nome VARCHAR(50) NOT NULL,<br>
+                        &nbsp;&nbsp;idade INT NOT NULL,<br>
+                        &nbsp;&nbsp;data_nascimento DATE NOT NULL,<br>
+                        &nbsp;&nbsp;email VARCHAR(50) NOT NULL UNIQUE,<br>
+                        &nbsp;&nbsp;curso VARCHAR(50) NOT NULL,<br>
+                        &nbsp;&nbsp;ano VARCHAR(50) NOT NULL, <br>
+                        &nbsp;&nbsp;CONSTRAINT idade_chk CHECK (idade >= 15)<br>
+                        );
+                    </code>
+                </section>
+                <!--FIM-->
+                <!--CRIAÇÃO TABELA ALUNO_COPIA-->
+                <h4>COMANDO &rightarrow; TABELA ALUNO_COPIA</h4>
+                <section>
+                    <code style="display: block;">
+                        CREATE TABLE aluno_copia AS<br>
+                        SELECT * <br>
+                        FROM aluno;
+                    </code>
+                </section>
+                <!--FIM-->
+                <!--CRIAÇÃO TABELA ENC_EDUCAÇÃO-->
+                <h4>COMANDO &rightarrow; TABELA ENC_EDUCAÇÃO</h4>
+                <section>
+                    <code style="display: block;">
+                        CREATE TABLE enc_educacao AS<br>
+                        SELECT id_aluno, nome, idade, data_nascimento, email <br>
+                        FROM aluno;
+                    </code>
+                </section>
+                <!--FIM-->
+                <!--CRIAÇÃO TABELA CURSO-->
+                <h4>COMANDO &rightarrow; TABELA CURSO</h4>
+                <section>
+                    <code style="display: block;">
+                        CREATE TABLE curso (<br>
+                        &nbsp;&nbsp;id_ano_curso BIGINT PRIMARY KEY,<br>
+                        &nbsp;&nbsp;nome VARCHAR(50) NOT NULL,<br>
+                        &nbsp;&nbsp;ano INTEGER NOT NULL,<br>
+                        );
+                    </code>
+                </section>
+                <!--FIM-->
+
+                <hr>
+
+                <!--RESULTADO-->
+                <h4>RESULTADO &rightarrow; CRIAÇÃO DE TABELAS</h4>
+                <section>
+                    <img src="imgs/tabelas/exemplo1.jpeg" alt="">
+                </section>
+                <!--FIM-->
+            </section>
+            <!--FIM-->
+
+            <!--EXEMPLO 2-->
+            <section>
+                <h2>EXEMPLO #2 &rightarrow; ALTERAÇÃO DE TABELAS</h2>
+                <p>Alterar as tabelas anteriormente criadas: criar/eliminar colunas, alterar nomes e tipos de dados das mesmas.</p>
+                <hr>
+
+                <!--ALTERAR TABELA CURSO-->
+                <h4>COMANDO &rightarrow; ALTERAR TABELA CURSO</h4>
+                <section>
+                    <code style="display: block;">
+                        ALTER TABLE curso <br>
+                        ALTER COLUMN ano DROP NOT NULL; <br>
+                    </code>
+                </section>
+
+                <!--ALTERAR TABELA ENC_EDUCACAO-->
+                <h4>COMANDO &rightarrow; ALTERAR TABELA ENC_EDUCAÇÃO</h4>
+                <section>
+                    <code style="display: block;">
+                        ALTER TABLE enc_educacao <br>
+                        ADD COLUMN morada TEXT NOT NULL;<br>
+                        <br>
+                        ALTER TABLE enc_educacao <br>
+                        ADD COLUMN telemovel VARCHAR(9) NOT NULL;<br>
+                        <br>
+                        ALTER TABLE enc_educacao <br>
+                        RENAME COLUMN id_aluno TO id_ee;<br>
+                        <br>
+                        ALTER TABLE enc_educacao <br>
+                        ADD PRIMARY KEY (id_ee); <br>
+                        <br>
+                        ALTER TABLE enc_educacao <br>
+                        ADD UNIQUE (email);
+                    </code>
+                    <p><b>DESAFIO: Colocar todas as colunas da tabela como <code>NOT NULL</code></b>.</p>
+                </section>
+                <!--FIM-->
+
+                <!--ALTERAR TABELA ALUNO-->
+                <h4>COMANDO &rightarrow; ALTERAR TABELA ALUNO</h4>
+                <section>
+                    <code style="display: block;">
+                        ALTER TABLE aluno <br>
+                        ADD COLUMN morada VARCHAR(50) NOT NULL;<br>
+                        <br>
+                        ALTER TABLE aluno <br>
+                        ADD COLUMN telemovel VARCHAR(9) NOT NULL;<br>
+                        <br>
+                        ALTER TABLE aluno <br>
+                        ADD COLUMN id_ee BIGINT NOT NULL;<br>
+                        <br>
+                        ALTER TABLE aluno <br>
+                        ADD COLUMN id_ano_curso BIGINT NOT NULL DEFAULT 1;<br>
+                        <br>
+                        ALTER TABLE aluno <br>
+                        DROP COLUMN ano;<br>
+                        <br>
+                        ALTER TABLE aluno <br>
+                        DROP COLUMN curso; <br>
+                        <br>
+                        ALTER TABLE aluno <br>
+                        ADD FOREIGN KEY (id_ee) REFERENCES enc_educacao(id_ee);<br>
+                        <br>
+                        ALTER TABLE aluno <br>
+                        ADD FOREIGN KEY (id_ano_curso) REFERENCES curso(id);
+                    </code>
+                </section>
+                <!---->
+                <section>
+                    <h5>Access | SQL Server</h5>
+                    <code style="display: block;">
+                        ALTER TABLE aluno <br>
+                        ALTER COLUMN morada TEXT;
+                    </code>
+                    <br>
+                    <h5>MySQL</h5>
+                    <code style="display: block;">
+                        ALTER TABLE aluno <br>
+                        MODIFY COLUMN morada TYPE TEXT;
+                    </code>
+                    <br>
+                    <h5>Oracle (Versão 10+)</h5>
+                    <code style="display: block;">
+                        ALTER TABLE aluno <br>
+                        MODIFY COLUMN morada TEXT;
+                    </code>
+                    <br>
+                    <h5>PostgreSQL</h5>
+                    <code style="display: block;">
+                        ALTER TABLE aluno <br>
+                        ALTER COLUMN morada TYPE TEXT;
+                    </code>
+                </section>
+                <!--FIM-->      
+                
+                <hr>
+
+                <!--RESULTADO-->
+                <h4>RESULTADO &rightarrow; ALTERAR TABELAS</h4>
+                <section>
+                    <img src="imgs/tabelas/exemplo2.jpeg" alt="">
+                </section>
+                <!--FIM-->
+            </section>
+            <!--FIM-->
+
+            <!--EXEMPLO 3-->
+            <section>
+                <h2>EXEMPLO #3 &rightarrow; ELIMINAR TABELAS</h2>
+                <p>Eliminar a tabela <code>aluno_copia</code>.</p>
+
+                <!--ELIMINAR TABELA ALUNO_COPIA-->
+                <h4>COMANDO &rightarrow; ELIMINAR TABELA ALUNO_COPIA</h4>
+                <section>
+                    <code style="display: block;">
+                        DROP TABLE aluno_copia;
+                    </code>
+                </section>
+                <!--FIM-->
+
+                <hr>
+
+                <!--RESULTADO-->
+                <h4>RESULTADO &rightarrow; ELIMINAR TABELAS</h4>
+                <section>
+                    <img src="imgs/tabelas/exemplo3.jpeg" alt="">
+                </section>
+                <!--FIM-->
+            </section>
+            <!--FIM-->
+        </div>
+        <!--FIM-->
+
+        <h4><i>GESTÃO E CONSULTA DE DADOS</i></h4>
+        <hr>
+
+        <!--ACORDIÃO CONSULTA E MANIPULAÇÃO DE DADOS-->
+        <button class="accordion"><b>Gestão e Consulta de Dados</b> &rightarrow; Comandos para consulta, inserção, alteração e eliminiação de dados.</button>
+        <!--INICIO-->
+        <div class="panel">
+            <!--INSERT INTO-->
+            <section>
+                <h2>INSERT INTO</h2>
+                <p>O comando <code>INSERT INTO</code> insere um ou mais novos registos numa tabela. Estes registos podem ser novos ou então cópias de uma outra tabela, cujos tipos de dados devem corresponder. Para transferir os dados entre tabelas, é utilizado o comando <code>INSERT INTO SELECT</code>.</p>
+                <hr>
+
+                <!--SINTAXE INSERT INTO-->
+                <h4>SINTAXE &rightarrow; INSERT INTO</h4>
+                <section>
+                    <code style="display: block;">
+                        INSERT INTO [tabela] ([coluna], [coluna], ...) VALUES<br>
+                        ([valor], [valor], ...);<br>
+                    </code>
+                </section>
+                <!--FIM INSERT INTO-->
+
+                <!--NOTA-->
+                <section>
+                    <b>
+                        <li>As colunas podem ser ordenadas aleatóriamente, desde que as colunas, os valores e os respetivos tipos correspondam devidamente;</li>
+                        <li>Os nomes das colunas da tabela podem ser omitidos caso a sua ordem corresponda à das colunas da tabela, ou seja, caso na tabela a ordem seja <code>id, nome, idade</code>, os dados a inserir devem seguir esta mesma ordem;</li>
+                        <li>Podem ser inseridos mais do que um registo de cada vez. Basta repetir a expressão <code>([valor], [valor], ...)</code> e separar essas diferentes instâncias por vírgulas.</li>
+                    </b>
+                </section>
+                <!--FIM-->
+                <hr>
+                
+
+                <!--SINTAXE INSERT INTO SELECT-->
+                <h4>SINTAXE &rightarrow; INSERT INTO + SELECT</h4>
+                <section>
+                    <code style="display: block;">
+                        INSERT INTO [tabela] ([coluna], [coluna], ...)<br>
+                        SELECT [coluna], [coluna], ... <br>
+                        FROM [tabela_existente] <br>
+                        WHERE [condição];
+                    </code>
+                </section>
+                <!--FIM INSERT INTO SELECT-->
+
+                <!--NOTA-->
+                <section>
+                    <b>
+                        <li>Em caso de consulta a todas as colunas, os nomes podem ser substituídos por <code>*</code>;</li>
+                        <li>A condição pode ser omitida, inserindo todos os dados das colunas selecionadas.</li>
+                    </b>
+                </section>
+                <!--FIM-->
+            </section>
+            <!--FIM-->
+            
+            <!--SELECT-->
+            <section>
+                <h2>SELECT</h2>
+                <p>O comando <code>SELECT</code> seleciona registos de uma determinada tabela. Normalmente é acompanhado por uma condição, que faz a filtragem dos registos, com recurso à cláusula <code>WHERE</code> e os diferentes operadores. Pode ser também incluída a palavra-chave <code>DISTINCT</code>, que faz com que apenas sejam selecionados os diferentes valores de uma coluna.</p>
+                <hr>
+
+                <!--SINTAXE SELECT-->
+                <h4>SINTAXE &rightarrow; SELECT</h4>
+                <section>
+                    <code style="display: block;">
+                        SELECT [coluna], [coluna], ... <br>
+                        FROM [tabela] <br>
+                        WHERE [condição];
+                    </code>
+                </section>
+                <!--FIM SELECT-->
+
+                <!--NOTA-->
+                <section>
+                    <b>
+                        <li>Em caso de consulta a todas as colunas, os nomes podem ser substituídos por <code>*</code>;</li>
+                        <li>A condição pode ser omitida, inserindo todos os dados das colunas selecionadas.</li>
+                    </b>
+                </section>
+                <!--FIM-->
+
+                <hr>
+
+                <!--SINTAXE SELECT DISTINCT-->
+                <h4>SINTAXE &rightarrow; SELECT + DISTINCT</h4>
+                <section>
+                    <p><i>Consulta de todas as colunas:</i></p>
+                    <code style="display: block;">
+                        SELECT DISTINCT [coluna], [coluna], ... <br>
+                        FROM [tabela];
+                    </code>
+                    <p><b>OBSERVAÇÃO: Ao selecionar duas ou mais tabelas, o comando <code>SELECT DISTINCT</code> mostrará todas as diferentes combinações dessas colunas existentes na tabela.</b></p>
+                </section>
+                <!--FIM SELECT DISTINCT-->
+            </section>
+            <!--FIM-->
+
+            <!--UPDATE-->
+            <section>
+                <h2>UPDATE</h2>
+                <p>O comando <code>UPDATE</code> altera um ou mais registos de uma determinada tabela.</p>
+                <hr>
+
+                <!--SINTAXE UPDATE-->
+                <h4>SINTAXE &rightarrow; UPDATE</h4>
+                <section>
+                    <code style="display: block;">
+                        UPDATE [tabela] <br>
+                        SET [coluna] = [valor], [coluna] = [valor], ... <br>
+                        WHERE [condição];
+                    </code>
+                    <p><b>OBSERVAÇÃO: Ao omitir a condição, o comando <code>UPDATE</code> irá alterar todos os registos da tabela.</b></p>
+                </section>
+                <!--FIM UPDATE-->
+            </section>
+            <!--FIM-->
+
+            <!--DELETE-->
+            <section>
+                <h2>DELETE</h2>
+                <p>O comando <code>DELETE</code> elimina permanentemente um ou mais registos de uma determinada tabela.</p>
+                <hr>
+
+                <!--SINTAXE DELETE-->
+                <h4>SINTAXE &rightarrow; DELETE</h4>
+                <section>
+                    <code style="display: block;">
+                        DELETE FROM [tabela] <br>
+                        WHERE [condição];
+                    </code>
+                    <p><b>OBSERVAÇÃO: Ao omitir a condição, o comando <code>DELETE</code> irá eliminar todos os registos da tabela.</b></p>
+                </section>
+                <!--FIM DELETE-->
+            </section>
+            <!--FIM-->
+
+            <!--TRUNCATE-->
+            <section>
+                <h2>TRUNCATE TABLE</h2>
+                <p>O comando <code>TRUNCATE TABLE</code> elimina todos os registos de uma tabela. Este comando faz o mesmo que o <code>DELETE</code> sem condição.</p>
+                <hr>
+
+                <!--SINTAXE TRUNCATE-->
+                <h4>SINTAXE &rightarrow; TRUNCATE</h4>
+                <section>
+                    <code style="display: block;">
+                        TRUNCATE TABLE [tabela];
+                    </code>
+                </section>
+                <!--FIM TRUNCATE-->
+            </section>
+            <!--FIM-->
+        </div>
+        <!--FIM-->
+
+        <!--ACORDIÃO CLÁUSULAS-->
+        <button class="accordion"><b>Cláusulas</b> &rightarrow; Comandos para o tratamento de dados durante a consulta dos mesmos.</button>
+        <!--INICIO-->
+        <div class="panel">
+
+            <!--CLÁUSULAS-->
+            <section>
+                <h2>CLÁUSULAS</h2>
+                <hr>
+                <p>Cláusulas são palavras-chave que especificam determinadas definições de uma consulta, tais como especificação de registos, ordenação, agrupamentos, entre outras.</p>
+                <p><b>OBSERVAÇÃO: A sua inclusão no comando SQL não é obrigatória.</b></p>
+            </section>
+            <!--FIM-->
+
+            <!--WHERE-->
+            <section>
+                <h2>CLÁUSULA WHERE</h2>
+                <p>A cláusula <code>WHERE</code> atribui uma condição à consulta, filtrando os registos da tabela, com recurso a <b>operadores</b>. Esta cláusula é utilizada, portanto, em consultas, mas também nos comandos <code>UPDATE</code> e <code>DELETE</code> para selecionar o(s) registo(s) a ser(em) alterado(s) ou eliminado(s).</p>
+                <hr>
+
+                <!--SINTAXE SELECT WHERE-->
+                <h4>SINTAXE &rightarrow; WHERE + SELECT</h4>   
+                <section>
+                    <code style="display: block;">
+                        SELECT [coluna], [coluna], ... <br>
+                        FROM [tabela] <br>
+                        WHERE [condição];
+                    </code>
+                </section>
+                <!--FIM SELECT WHERE-->
+
+                <hr>
+
+                <!--SINTAXE UPDATE WHERE-->
+                <h4>SINTAXE &rightarrow; WHERE + UPDATE</h4>   
+                <section>
+                    <code style="display: block;">
+                        UPDATE [tabela] <br>
+                        SET [coluna] = [valor], [coluna] = [valor], ... <br>
+                        WHERE [condição];
+                    </code>
+                </section>
+                <!--FIM UPDATE WHERE-->
+
+                <hr>
+
+                <!--SINTAXE DELETE WHERE-->
+                <h4>SINTAXE &rightarrow; WHERE + DELETE</h4>   
+                <section>
+                    <code style="display: block;">
+                        DELETE FROM [tabela] <br>
+                        WHERE [condição];
+                    </code>
+                </section>
+                <!--FIM DELETE WHERE-->
+            </section>
+            <!--FIM-->
+
+            <!--ORDER BY-->
+            <section>
+                <h2>CLÁUSULA ORDER BY</h2>
+                <p>A cláusula <code>ORDER BY</code> ordena os registos consultados de uma tabela, de forma ascendente/crescente, descendente/decrescente ou ambas. Esta cláusula, numa consulta, posiciona-se à frente da cláusula <code>WHERE</code>.</p>
+                <hr>
+
+                <!--SINTAXE ORDER BY ASC-->
+                <h4>SINTAXE &rightarrow; ORDER BY + ASC (UMA OU MÚLTIPLAS COLUNAS)</h4>   
+                <section>
+                    <code style="display: block;">
+                        SELECT [coluna], [coluna], ... <br>
+                        FROM [tabela] <br>
+                        WHERE [condição] <br>
+                        ORDER BY [coluna] ASC, [coluna] ASC, ...;
+                    </code>
+                    <p><b>OBSERVAÇÃO: A palavra-chave <code>ASC</code> pode ser omitida.</b></p>
+                </section>
+                <!--FIM ORDER BY ASC-->
+
+                <hr>
+
+                <!--SINTAXE ORDER BY ASC-->
+                <h4>SINTAXE &rightarrow; ORDER BY + DESC (UMA OU MÚLTIPLAS COLUNAS)</h4>   
+                <section>
+                    <code style="display: block;">
+                        SELECT [coluna], [coluna], ... <br>
+                        FROM [tabela] <br>
+                        WHERE [condição] <br>
+                        ORDER BY [coluna] DESC, [coluna] DESC, ...;
+                    </code>
+                </section>
+                <!--FIM ORDER BY ASC-->
+
+                <hr>
+
+                <!--SINTAXE ORDER BY ASC-->
+                <h4>SINTAXE &rightarrow; ORDER BY + ASC + DESC (UMA OU MÚLTIPLAS COLUNAS)</h4>   
+                <section>
+                    <code style="display: block;">
+                        SELECT [coluna], [coluna], ... <br>
+                        FROM [tabela] <br>
+                        WHERE [condição] <br>
+                        ORDER BY [coluna] ASC, [coluna] DESC, ...;
+                    </code>
+                </section>
+                <!--FIM ORDER BY ASC-->
+
+                <!--NOTA-->
+                <section>
+                    <b>
+                        <li>A palavra-chave <code>ASC</code> pode ser omitida;</li>
+                        <li>A ordenação é feita consoante a ordem das colunas selecionadas.</li>
+                    </b>
+                </section>
+                <!--FIM-->
+            </section>
+            <!--FIM-->
+
+            <!--TOP/LIMIT-->
+            <section>
+                <h2>CLÁUSULA TOP</h2>
+                <p>A cláusula <code>TOP</code> (SQL Server/Access), <code>LIMIT</code> (MySQL/PostgreSQL) ou <code>FETCH FIRST</code> (Oracle) cria um limite de resultados a ser mostrados durante uma consulta.</p>
+                <hr>
+
+                <!--SINTAXE TOP/LIMIT-->
+                <h4>SINTAXE &rightarrow; TOP/LIMIT</h4>
+                <section>
+                    <h5>Access | SQL Server</h5>
+                    <code style="display: block;">
+                        SELECT TOP [número/percentagem] [coluna], [coluna], ... <br>
+                        FROM [tabela] <br>
+                        WHERE [condição]; <br>
+                        ORDER BY [coluna], [coluna], ...;
+                    </code>
+                    <br>
+                    <h5>MySQL | PostgreSQL</h5>
+                    <code style="display: block;">
+                        SELECT TOP [número/percentagem] [coluna], [coluna], ... <br>
+                        FROM [tabela] <br>
+                        WHERE [condição]; <br>
+                        ORDER BY [coluna], [coluna], ... <br>
+                        LIMIT [número];
+                    </code>
+                    <br>
+                    <h5>Oracle (Versão 12+)</h5>
+                    <code style="display: block;">
+                        SELECT [coluna], [coluna], ... <br>
+                        FROM [tabela] <br>
+                        WHERE [condição]; <br>
+                        ORDER BY [coluna], [coluna], ... <br>
+                        FETCH FIRST [número] ROWS ONLY;
+                    </code>
+                </section>
+                <!--FIM TOP/LIMIT-->
+            </section>
+            <!--FIM-->
+        </div>
+        <!--FIM-->
+
+        <!--ACORDIÃO OPERADORES-->
+        <button class="accordion"><b>Operadores</b> &rightarrow; Comandos para a filtragem de dados durante a consulta dos mesmos.</button>
+        <!--INICIO-->
+        <div class="panel">
+            <!--OPERADORES-->
+            <section>
+                <h2>OPERADORES</h2>
+                <hr>
+                <p>Os operadores são símbolos/palavras utilizadas para comparar duas ou mais expressões. São utilizadas em conjunto com a cláusula <code>WHERE</code>.</p>
+                <p><b>OBSERVAÇÃO: Não serão abordados os operadores mais comuns: '=', '<>' ou '!=', '&gt;', '&ge;', '&lt;', '&le;'.</b></p>
+            </section>
+            <!--FIM-->
+
+            <!--OPERADORES AND, OR, NOT-->
+            <section>
+                <h2>OPERADORES AND, OR, NOT</h2>
+                <p>Os operadores <code>AND</code>, <code>OR</code> e <code>NOT</code> são os mais simples da linguagem SQL. <code>AND</code> e <code>OR</code> fazem a comparação entre duas condições diferentes. Já <code>NOT</code> mostra o resultado contrário da condição presente.</p>
+                <hr>
+
+                <!--SINTAXE OPERADOR AND-->
+                <h4>SINTAXE &rightarrow; AND</h4>   
+                <section>
+                    <code style="display: block;">
+                        WHERE [condição] AND [condição];
+                    </code>
+                </section>
+                <!--FIM AND-->
+
+                <hr>
+
+                <!--SINTAXE OPERADOR OR-->
+                <h4>SINTAXE &rightarrow; OR</h4>   
+                <section>
+                    <code style="display: block;">
+                        WHERE [condição] OR [condição];
+                    </code>
+                </section>
+                <!--FIM OR-->
+
+                <hr>
+
+                <!--SINTAXE OPERADOR NOT-->
+                <h4>SINTAXE &rightarrow; NOT</h4>   
+                <section>
+                    <code style="display: block;">
+                        WHERE NOT [condição];
+                    </code>
+                </section>
+                <!--FIM NOT-->
+
+                <hr>
+
+                <!--SINTAXE OPERADOR AND OR-->
+                <h4>SINTAXE &rightarrow; AND + OR</h4>   
+                <section>
+                    <code style="display: block;">
+                        WHERE [condição] AND [condição] OR [condição];
+                    </code>
+                    <p><b>OBSERVAÇÃO: A utilização ou não de parêntesis influencia o resultado, já que <code>AND</code> tem prioridade em relação ao <code>OR</code>.</b></p>
+                </section>
+                <!--FIM AND OR-->
+
+                <hr>
+
+                <!--SINTAXE OPERADOR NOT AND-->
+                <h4>SINTAXE &rightarrow; NOT + AND</h4>   
+                <section>
+                    <code style="display: block;">
+                        WHERE NOT ([condição] AND [condição]);
+                    </code>
+                </section>
+                <!--FIM NOT AND-->
+
+                <hr>
+
+                <!--SINTAXE OPERADOR NOT OR-->
+                <h4>SINTAXE &rightarrow; NOT + OR</h4>   
+                <section>
+                    <code style="display: block;">
+                        WHERE NOT ([condição] OR [condição]);
+                    </code>
+                </section>
+                <!--FIM NOT OR-->
+
+                <hr>
+
+                <!--SINTAXE OPERADOR NOT BETWEEN, IN, LIKE-->
+                <h4>SINTAXE &rightarrow; NOT + BETWEEN | NOT + IN | NOT + LIKE</h4>   
+                <section>
+                    <h5>BETWEEN</h5>
+                    <code style="display: block;">
+                        WHERE [coluna] NOT BETWEEN [valor] AND [valor];
+                    </code>
+                    <br>
+                    <h5>IN</h5>
+                    <code style="display: block;">
+                        WHERE [coluna] NOT IN ([valor], [valor], ...);
+                    </code>
+                    <br>
+                    <h5>LIKE</h5>
+                    <code style="display: block;">
+                        WHERE [coluna] NOT LIKE '[padrão]';
+                    </code>
+                </section>
+                <!--FIM NOT BETWEEN, IN, LIKE-->
+            </section>
+            <!--FIM-->
+
+            <!--OPERADOR BETWEEN-->
+            <section>
+                <h2>OPERADOR BETWEEN</h2>
+                <p>O operador <code>BETWEEN</code> filtra registos de uma determinada tabela consoante um intervalo de valores. O operador é inclusivo, ou seja, os limites também contam.</p>
+                <hr>
+
+                <!--SINTAXE OPERADOR BETWEEN-->
+                <h4>SINTAXE &rightarrow; BETWEEN</h4>   
+                <section>
+                    <code style="display: block;">
+                        WHERE [coluna] BETWEEN [valor] AND [valor];
+                    </code>
+                </section>
+                <!--FIM BETWEEN-->
+            </section>
+            <!--FIM-->
+
+            <!--OPERADOR IN-->
+            <section>
+                <h2>OPERADOR IN</h2>
+                <p>O operador <code>IN</code> filtra registos de uma determinada tabela consoante um determinado conjunto de valores alfanuméricos específicos.</p>
+                <hr>
+
+                <!--SINTAXE OPERADOR IN-->
+                <h4>SINTAXE &rightarrow; IN</h4>   
+                <section>
+                    <code style="display: block;">
+                        WHERE [coluna] IN ([valor], [valor], ...);
+                    </code>
+                </section>
+                <!--FIM IN-->
+            </section>
+            <!--FIM-->
+
+            <!--OPERADOR LIKE-->
+            <section>
+                <h2>OPERADOR LIKE</h2>
+                <p>O operador <code>LIKE</code> filtra registos de uma determinada tabela de acordo com um padrão alfanumérico. Este padrão faz recurso às <b><i>wildcards</i></b>.</p>
+                <hr>
+
+                <!--SINTAXE OPERADOR LIKE-->
+                <h4>SINTAXE &rightarrow; LIKE</h4>
+                <section>
+                    <code style="display: block;">
+                        WHERE [coluna] LIKE '[padrão]';
+                    </code>
+                </section>
+            </section>
+            <!--FIM-->
+        </div>
+        <!--FIM-->
+
+        <!--ACORDIÃO FUNÇÕES-->
+        <button class="accordion"><b>Funções</b> &rightarrow; Processos para a obtenção de informação sobre os dados.</button>
+        <!--INICIO-->
+        <div class="panel">
+            <!--FUNÇÕES-->
+            <section>
+                <h2>FUNÇÕES</h2>
+                <hr>
+                <p>As funções, em SQL, são métodos que realizam cálculos acerca de colunas e registos consultados.</p>
+            </section>
+            <!--FIM-->
+
+            <!--FUNÇÃO MIN()-->
+            <section>
+                <h2>FUNÇÃO MIN</h2>
+                <p>A função <code>MIN()</code> retorna o valor mínimo de um determinado campo numérico.</p>
+                <hr>
+
+                <!--SINTAXE MIN()-->
+                <h4>SINTAXE &rightarrow; MIN()</h4>
+                <section>
+                    <code style="display: block;">
+                        SELECT MIN([coluna]) <br>
+                    </code>
+                    <p><b>OBSERVAÇÃO: Em colunas de <i>string</i>, a função <code>MIN()</code> retorna a primeira <i>string</i> alfabeticamente ordenada.</b></p>
+                </section>
+                <!--FIM MIN()-->
+            </section>
+            <!--FIM-->
+
+            <!--FUNÇÃO MAX()-->
+            <section>
+                <h2>FUNÇÃO MAX</h2>
+                <p>A função <code>MAX()</code> retorna o valor máximo de um determinado campo numérico.</p>
+                <hr>
+
+                <!--SINTAXE MAX()-->
+                <h4>SINTAXE &rightarrow; MAX()</h4>
+                <section>
+                    <code style="display: block;">
+                        SELECT MAX([coluna]) <br>
+                    </code>
+                    <p><b>OBSERVAÇÃO: Em colunas de <i>string</i>, a função <code>MAX()</code> retorna a última <i>string</i> alfabeticamente ordenada.</b></p>
+                </section>
+                <!--FIM MAX()-->
+            </section>
+            <!--FIM-->
+
+            <!--FUNÇÃO SUM()-->
+            <section>
+                <h2>FUNÇÃO SUM</h2>
+                <p>A função <code>SUM()</code> retorna a soma dos valores de um determinado campo numérico.</p>
+                <hr>
+
+                <!--SINTAXE SUM()-->
+                <h4>SINTAXE &rightarrow; SUM()</h4>
+                <section>
+                    <code style="display: block;">
+                        SELECT SUM([coluna]) <br>
+                    </code>
+                    <p><b>OBSERVAÇÃO: Em colunas de <i>string</i>, a função <code>SUM()</code> pode ser utilizada caso todos os valores sejam convertíveis para um valor numérico. Esta funcionalidade não ocorre em todos os SGBD.</b></p>
+                </section>
+                <!--FIM SUM()-->
+            </section>
+            <!--FIM-->
+
+            <!--FUNÇÃO AVG()-->
+            <section>
+                <h2>FUNÇÃO AVG</h2>
+                <p>A função <code>AVG()</code> retorna a média dos valores de um determinado campo numérico.</p>
+                <hr>
+
+                <!--SINTAXE AVG()-->
+                <h4>SINTAXE &rightarrow; AVG()</h4>
+                <section>
+                    <code style="display: block;">
+                        SELECT AVG([coluna]) <br>
+                    </code>
+                    <p><b>OBSERVAÇÃO: Em colunas de <i>string</i>, a função <code>AVG()</code> pode ser utilizada caso todos os valores sejam convertíveis para um valor numérico. Esta funcionalidade não ocorre em todos os SGBD.</b></p>
+                </section>
+                <!--FIM AVG()-->
+            </section>
+            <!--FIM-->
+
+            <!--FUNÇÃO COUNT()-->
+            <section>
+                <h2>FUNÇÃO COUNT</h2>
+                <p>A função <code>COUNT()</code> retorna o número de registos ou número de valores não nulos de uma coluna. Para contar o número de valores diferentes, é utilizada a palavra-chave <code>DISTINCT</code>.</p>
+                <hr>
+
+                <!--SINTAXE COUNT()-->
+                <h4>SINTAXE &rightarrow; COUNT()</h4>
+                <section>
+                    <code style="display: block;">
+                        SELECT COUNT([coluna]);
+                    </code>
+                    <p><b>OBSERVAÇÃO: Nome das colunas pode ser substituído por <code>*</code>, retornando número total de registos.</b></p>
+                </section>
+                <!--FIM TOP/LIMIT-->
+
+                <hr>
+
+                <!--SINTAXE COUNT() DISTINCT-->
+                <h4>SINTAXE &rightarrow; COUNT() + DISTINCT</h4>
+                <section>
+                    <code style="display: block;">
+                        SELECT COUNT(DISTINCT [coluna]);
+                    </code>
+                </section>
+                <!--FIM DISTINCT-->
+            </section>
+            <!--FIM-->
+        </div>
+        <!--FIM-->
+
+        <!--ACORDIÃO ALIAS-->
+        <button class="accordion"><b>Alias</b> &rightarrow; Atrbuição de apelidos a tabelas e colunas.</button>
+        <!--INICIO-->
+        <div class="panel">
+            <section>
+                <h2>ALIAS</h2>
+                <p><i>Alias</i> é uma funcionalidade em SQL que permite atribuir um apelido a uma tabela ou coluna. Este apelido é dado através da palavra-chave <code>AS</code>.</p>
+                <hr>
+                <!--ALIAS PARA TABELAS-->
+                <h4>Alias &rightarrow; Tabela</h4>
+                <section>
+                    <code style="display: block;">
+                        SELECT [apelido_1].[coluna], [apelido_2].[coluna], ... <br>
+                        FROM [tabela] AS [apelido_1], [tabela_2] AS [apelido_2] <br>
+                        WHERE [condição];
+                    </code>
+                </section>
+                <!--FIM-->
+
+                <!--NOTA-->
+                <section>
+                    <b>
+                        <li>O apelido pode conter espaços desde que esteja entre parêntesis retos ('[]');</li>
+                        <li>A palavra-chave <code>AS</code> pode ser ignorada, quando a tabela é chamada apenas uma vez, sendo necessária em caso contrário, transformando a sintaxe em <code>[tabela] [apelido]</code>.</li>
+                    </b>
+                </section>
+                <!--FIM-->
+
+                <hr>
+
+                <!--ALIAS PARA COLUNAS-->
+                <h4>Alias &rightarrow; Coluna</h4>
+                <section>
+                    <code style="display: block;">
+                        SELECT [coluna] AS [apelido], [coluna] AS [apelido], ... <br>
+                        FROM [tabela] <br>
+                        WHERE [condição];
+                    </code>
+                </section>
+                <!--FIM-->
+
+                <!--NOTA-->
+                <section>
+                    <b>
+                        <li>O apelido pode conter espaços desde que esteja entre parêntesis retos ('[]');</li>
+                        <li>A palavra-chave <code>AS</code> pode ser ignorada, transformando a sintaxe em <code>[coluna] [apelido]</code>.</li>
+                    </b>
+                </section>
+                <!--FIM-->
+
+            </section>
+        </div>
+        <!--FIM-->
+    
+        <!--ACORDIÃO WILDCARDS-->
+        <button class="accordion"><b>Wildcards</b> &rightarrow; Carateres utilizados para a filtragem por padrões (texto).</button>
+        <!--INICIO-->
+        <div class="panel">
+            <section>
+                <h2>WILDCARDS</h2>
+                <p><i>Wildcards</i> são carateres que substituem um ou mais carateres numa <i>string</i>. Os <i>wildcards</i> são utilizados em conjunto com o operador <code>LIKE</code> para criar padrões de filtragem de registos.</p>
+                <p><b>OBSERVAÇÃO: Os padrões utilizados, normalmente, são <i>case insensitive</i>, sendo necessária a verificação da documentação do SGBD a ser utilizado.</b></p>
+                <hr>
+                <!--WILDCARD %-->
+                <h4>Wildcard &rightarrow; '%'</h4>
+                <section>
+                    <p>O <i>widlcard</i> <b>'%'</b> simboliza zero ou vários carateres, e tem caráter universal, já que é suportado por todos os SGBD.</p>
+                    <p>Em Access, <b>'%'</b> é substituído pelo carater <b>'*'</b>.</p>
+                    <p>Exemplificando, <b>'A%'</b> traduz-se para todas as <i>strings</i> que comecem por <b>'A'</b>, sendo seguidas por uma indeterminada sequência de carateres.</p>
+                </section>
+                <!--FIM-->
+                <hr>
+                <!--WILDCARD _-->
+                <h4>Wildcard &rightarrow; '_'</h4>
+                <section>
+                    <p>O <i>widlcard</i> <b>'_'</b> simboliza um único carater e, assim como <b>'%'</b>, este carater é suportado por todos os SGBD.</p>
+                    <p>Em Access, <b>'_'</b> é substituído pelo carater <b>'?'</b>.</p>
+                    <p>Exemplificando, <b>'_a%'</b> traduz-se para todas as <i>strings</i> que comecem por um determinado carater, seguido de um <b>'a'</b> e uma indeterminada sequência de carateres.</p>
+                </section>
+                <!--FIM-->
+                <hr>
+                <!--WILDCARD []-->
+                <h4>Wildcard &rightarrow; '[]'</h4>
+                <section>
+                    <p>O <i>widlcard</i> <b>'[]'</b> simboliza qualquer carater dentro dos parêntesis retos. Este <i>wildcard</i> não é universal, pois não é suportado pelo PostgreSQL e MySQL.</p>
+                    <p>Exemplificando, <b>'[ACD]%'</b> traduz-se para todas as <i>strings</i> que comecem por um <b>'A'</b>, <b>'C'</b> ou <b>'D'</b>, seguidos de uma indeterminada sequência de carateres.</p>
+                </section>
+                <!--FIM-->
+                <hr>
+                <!--WILDCARD ^-->
+                <h4>Wildcard &rightarrow; '^'</h4>
+                <section>
+                    <p>O <i>widlcard</i> <b>'^'</b> simboliza qualquer carater fora dos parêntesis retos. Este <i>wildcard</i> não é universal, pois não é suportado pelo PostgreSQL e MySQL.</p>
+                    <p>Em Access, <b>'^'</b> é substituído pelo carater <b>'!'</b>.</p>
+                    <p>Exemplificando, <b>'[^ACD]%'</b> traduz-se para todas as <i>strings</i> que comecem não comecem por um <b>'A'</b>, <b>'C'</b> ou <b>'D'</b>, seguidos de uma indeterminada sequência de carateres.</p>
+                </section>
+                <!--FIM-->
+                <hr>
+                <!--WILDCARD --->
+                <h4>Wildcard &rightarrow; '-'</h4>
+                <section>
+                    <p>O <i>widlcard</i> <b>'-'</b> simboliza qualquer carater dentro do limite definido. Este <i>wildcard</i> não é universal, pois não é suportado pelo PostgreSQL e MySQL.</p>
+                    <p>Exemplificando, <b>'[A-F]%'</b> traduz-se para todas as <i>strings</i> que comecem comecem por um <b>'A'</b>, <b>'B'</b>, <b>'C'</b>, <b>'D'</b>, <b>'E'</b>, <b>'F'</b>, seguidos de uma indeterminada sequência de carateres.</p>
+                </section>
+                <!--FIM-->
+            </section>
+        </div>
+        <!--FIM-->
+
+        <!--ACORDIÃO EXEMPLOS-->
+        <button class="accordion"><b>Exemplos</b> &rightarrow; Exemplificação dos conceitos abordados nesta categoria.</button>
+        <!--INICIO-->
+        <div class="panel">
+            <!--EXEMPLO 1-->
+            <section>
+                <h2>EXEMPLO #1 &rightarrow; INSERÇÃO DE DADOS</h2>
+                <p>Inserção de dados nas tabelas criadas. É regra começar pelas tabelas sem dependências (<code>curso</code> e <code>enc_educacao</code>).</p>
+                <hr>
+
+                <!--CARREGAMENTO TABELA CURSO-->
+                <h4>COMANDO &rightarrow; TABELA CURSO</h4>
+                <section>
+                    <code style="display: block;">
+                        INSERT INTO curso VALUES <br>
+                        (1, 'Não inscrito', NULL),<br>
+                        (2, 'Informática e Tecnologias Multimédia', 10),<br>
+                        (3, 'Informática e Tecnologias Multimédia', 11),<br>
+                        (4, 'Informática e Tecnologias Multimédia', 12),<br>
+                        (5, 'Comunicação Multimédia', 10),<br>
+                        (6, 'Comunicação Multimédia', 11),<br>
+                        (7, 'Comunicação Multimédia', 12),<br>
+                        (8, 'Análises Químico-Biológicas', 10),<br>
+                        (9, 'Análises Químico-Biológicas', 11),<br>
+                        (10, 'Análises Químico-Biológicas', 12),<br>
+                    </code>
+                </section>
+                <!--FIM-->
+                <!--CARREGAMENTO TABELA ENC_EDUCACAO-->
+                <h4>COMANDO &rightarrow; TABELA ENC_EDUCACAO</h4>
+                <section>
+                    <code style="display: block;">
+                        INSERT INTO enc_educacao VALUES <br>
+                        (1, 'Ana Silva', 35, '1987-08-15', 'ana.silva@example.com', 'Rua de Vila Nova, Vila Nova de Gaia', '912345678'), <br>
+                        (2, 'João Santos', 40, '1982-05-20', 'joao.santos@example.com', 'Avenida da Liberdade, Vila Nova de Gaia', '935678912'), <br>
+                        (3, 'Marta Oliveira', 38, '1984-11-10', 'marta.oliveira@example.com', 'Travessa das Flores, Vila Nova de Gaia', '925678345'), <br>
+                        (4, 'Rui Costa', 32, '1990-03-25', 'rui.costa@example.com', 'Praça da República, Vila Nova de Gaia', '916789123'), <br>
+                        (5, 'Inês Ferreira', 45, '1977-09-05', 'ines.ferreira@example.com', 'Rua dos Pinheiros, Vila Nova de Gaia', '931234567'), <br>
+                        (6, 'Pedro Rodrigues', 37, '1985-12-18', 'pedro.rodrigues@example.com', 'Avenida dos Aliados, Vila Nova de Gaia', '935678234'), <br>
+                        (7, 'Sofia Gonçalves', 39, '1983-07-30', 'sofia.goncalves@example.com', 'Rua das Oliveiras, Vila Nova de Gaia', '918765432');
+                    </code>
+                </section>
+                <!--FIM-->
+                <!--CARREGAMENTO TABELA ALUNO-->
+                <h4>COMANDO &rightarrow; TABELA ALUNO</h4>
+                <section>
+                    <p><b>DESAFIO: Insere na tabela <code>aluno</code> pelo menos 10 registos.</b></p>
+                </section>
+                <!--FIM-->
+
+                <hr>
+
+                <!--RESULTADO-->
+                <h4>RESULTADO &rightarrow; INSERÇÃO DE TABELAS</h4>
+                <section>
+                    <img src="imgs/consulta_manipulacao_dados/exemplo1_1.jpeg" alt="">
+                </section>
+                <section>
+                    <img src="imgs/consulta_manipulacao_dados/exemplo1_2.jpeg" alt="">
+                </section>
+                <section>
+                    <img src="imgs/consulta_manipulacao_dados/exemplo1_3.jpeg" alt="">
+                </section>
+                <!--FIM-->
+            </section>
+            <!--FIM-->
+
+            <!--EXEMPLO 2-->
+            <section>
+                <h2>EXEMPLO #2 &rightarrow; CONSULTA DE DADOS (CLÁUSULAS)</h2>
+                <p>Selecionar os 5 primeiros registos da tabela <code>aluno</code> onde <code>idade >= 16</code>, ordenados por nome descendente e idade crescente.</p>
+                <p><b>OBSERVAÇÃO: Será inserido mais um registo para compreender melhor a clásula <code>ORDER BY</code> mista.</b></p>
+                <hr>
+
+                <!--SELECIONAR REGISTOS-->
+                <h4>COMANDO &rightarrow; TABELA ALUNO</h4>
+                <section>
+                    <h5>Access</h5>
+                    <code style="display: block;">
+                        SELECT TOP 5 * <br>
+                        FROM aluno <br>
+                        WHERE idade >= 16 <br>
+                        ORDER BY nome DESC, idade;
+                    </code>
+                    <br>
+                    <h5>MySQL | PostgreSQL</h5>
+                    <code style="display: block;">
+                        SELECT * <br>
+                        FROM aluno <br>
+                        WHERE idade >= 16 <br>
+                        ORDER BY nome DESC, idade; <br>
+                        LIMIT 5;
+                    </code>
+                </section>
+                <!--FIM-->
+                
+                <hr>
+
+                <!--RESULTADO-->
+                <h4>RESULTADO &rightarrow; CONSULTA DE DADOS (CLÁUSULAS)</h4>
+                <section>
+                    <img src="imgs/consulta_manipulacao_dados/exemplo_2.jpeg" alt="">
+                </section>
+                <!--FIM-->
+            </section>
+            <!--FIM-->
+
+            <!--EXEMPLO 3-->
+            <section>
+                <h2>EXEMPLO #3 &rightarrow; CONSULTA DE DADOS (AND | OR | NOT)</h2>
+                <p>Utilização dos diferentes operadores e retornar diferentes resultados.</p>
+                <p>Utilizar os operadores <code>AND</code> e <code>OR</code> para descobrir quais alunos têm 15 anos e cujo encarregado de educação é o de código 1 ou 5.</p>
+                <p>Utilizar o operador <code>NOT</code> para descobrir todos os alunos que não são do curso de Informática e Tecnologias Multimédia.</p>
+
+                <!--ALÍNEA A-->
+                <h4>COMANDO &rightarrow; TABELA ALUNO (AND + OR)</h4>
+                <section>
+                    <code style="display: block;">
+                        SELECT * <br>
+                        FROM aluno <br>
+                        WHERE idade = 15 AND (id_ee = 1 OR id_ee = 5);
+                    </code>
+                </section>
+                <!--FIM-->
+
+                <!--ALÍNEA B-->
+                <h4>COMANDO &rightarrow; TABELA ALUNO (NOT)</h4>
+                <section>
+                    <code style="display: block;">
+                        SELECT * <br>
+                        FROM aluno <br>
+                        WHERE NOT (id_ano_curso = 2 OR id_ano_curso = 3 OR id_ano_curso = 4);
+                    </code>
+                </section>
+                <!--FIM-->
+
+                <hr>
+
+                <!--RESULTADO-->
+                <h4>RESULTADO &rightarrow; CONSULTA DE DADOS (AND | OR | NOT)</h4>
+                <section>
+                    <img src="imgs/consulta_manipulacao_dados/exemplo3_1.jpeg" alt="">
+                </section>
+                <section>
+                    <img src="imgs/consulta_manipulacao_dados/exemplo3_2.jpeg" alt="">
+                </section>
+                <!--FIM-->
+            </section>
+            <!--FIM-->
+
+            <!--EXEMPLO 4-->
+            <section>
+                <h2>EXEMPLO #4 &rightarrow; CONSULTA DE DADOS (BETWEEN | IN | LIKE)</h2>
+                <p>Encontrar os encarregados de educação com idades entre 30 a 35, cujo número de telefone comece por <i>91</i>. Existem duas formas de relizar esta consulta: com <code>BETWEEN</code> e <code>LIKE</code>, ou <code>IN</code> e <code>LIKE</code>.</p>
+
+                <!--ALÍNEA A-->
+                <h4>COMANDO &rightarrow; TABELA ENC_EDUCACAO (BETWEEN + LIKE)</h4>
+                <section>
+                    <code style="display: block;">
+                        SELECT * <br>
+                        FROM enc_educacao <br>
+                        WHERE idade BETWEEN 30 AND 35 AND telemovel LIKE '91%';
+                    </code>
+                </section>
+                <!--FIM-->
+
+                <!--ALÍNEA B-->
+                <h4>COMANDO &rightarrow; TABELA ENC_EDUCACAO (IN + LIKE)</h4>
+                <section>
+                    <code style="display: block;">
+                        SELECT * <br>
+                        FROM enc_educacao <br>
+                        WHERE idade IN (30, 31, 32, 33, 34, 35) AND telemovel LIKE '91%';
+                    </code>
+                </section>
+                <!--FIM-->
+
+                <hr>
+
+                <!--RESULTADO-->
+                <h4>RESULTADO &rightarrow; CONSULTA DE DADOS (BETWEEN | IN | LIKE)</h4>
+                <section>
+                    <img src="imgs/consulta_manipulacao_dados/exemplo4.jpeg" alt="">
+                </section>
+                <!--FIM-->
+            </section>
+            <!--FIM-->
+
+            <!--EXEMPLO 5-->
+            <section>
+                <h2>EXEMPLO #5 &rightarrow; CONSULTA DE DADOS (FUNÇÕES)</h2>
+                <p>Utilizar as diferentes funções e obter: soma e média das idades, máximo e mínimo das idades e nomes, número de registos e número de diferentes encarregados de educação.</p>
+
+                <!--COMANDO FUNÇÕES-->
+                <h4>COMANDO &rightarrow; TABELA ALUNO</h4>
+                <section>
+                    <code style="display: block;">
+                        SELECT SUM(idade) s_idade, AVG(idade) m_idade, MIN(idade) min_idade, MIN(nome) min_nome, MAX(idade) max_idade, MAX(nome) max_nome, COUNT(*) total, COUNT(DISTINCT id_ee) n_ee<br>
+                        FROM aluno;
+                    </code>
+                </section>
+                <!--FIM-->
+
+                <hr>
+
+                <!--RESULTADO-->
+                <h4>RESULTADO &rightarrow; CONSULTA DE DADOS (FUNÇÕES)</h4>
+                <section>
+                    <img src="imgs/consulta_manipulacao_dados/exemplo5.jpeg" alt="">
+                </section>
+                <!--FIM-->
+            </section>
+            <!--FIM-->
+
+            <!--EXEMPLO 6-->
+            <section>
+                <h2>EXEMPLO #6 &rightarrow; ATUALIZAÇÃO DE DADOS</h2>
+                <p>Atualizar o email de todos os registos da tabela e alterar o curso do registo de código <i>5</i>.</p>
+                <hr>
+
+                <!--COMANDO A-->
+                <h4>COMANDO &rightarrow; ALTERAR REGISTO ÚNICO</h4>
+                <section>
+                    <code style="display: block;">
+                        UPDATE aluno <br>
+                        SET id_ano_curso = 2 <br>
+                        WHERE id_aluno = 5;
+                    </code>
+                </section>
+                <!--FIM-->
+
+                <!--COMANDO B-->
+                <h4>COMANDO &rightarrow; ALTERAR TODOS OS REGISTOS</h4>
+                <section>
+                    <code style="display: block;">
+                        UPDATE aluno <br>
+                        SET morada = 'Rua Igual, Vila Nova de Gaia';
+                    </code>
+                </section>
+                <!--FIM-->
+
+                <hr>
+
+                <!--RESULTADO-->
+                <h4>RESULTADO &rightarrow; ATUALIZAÇÃO DE DADOS</h4>
+                <section>
+                    <img src="imgs/consulta_manipulacao_dados/exemplo6.jpeg" alt="">
+                </section>
+                <!--FIM-->
+            </section>
+            <!--FIM-->
+
+            <!--EXEMPLO 7-->
+            <section>
+                <h2>EXEMPLO #7 &rightarrow; ELIMINAR DADOS</h2>
+                <p>Eliminar todos os registos da tabela <code>aluno</code> e eliminar o encarregado de educação com maior idade.</p>
+
+                <!--COMANDO A-->
+                <h4>COMANDO &rightarrow; ELIMINAR TODOS OS REGISTOS</h4>
+                <section>
+                    <code style="display: block;">
+                        DELETE FROM aluno;
+                    </code>
+                </section>
+                <!--FIM-->
+
+                <!--COMANDO B-->
+                <h4>COMANDO &rightarrow; ELIMINAR UM REGISTO</h4>
+                <section>
+                    <code style="display: block;">
+                        DELETE FROM enc_educacao <br>
+                        WHERE idade = (SELECT MAX(idade) FROM enc_educacao);
+                    </code>
+                </section>
+                <!--FIM-->
+
+                <hr>
+
+                <!--RESULTADO-->
+                <h4>RESULTADO &rightarrow; ELIMINAR DADOS</h4>
+                <section>
+                    <img src="imgs/consulta_manipulacao_dados/exemplo7_1.jpeg" alt="">
+                </section>
+                <section>
+                    <img src="imgs/consulta_manipulacao_dados/exemplo7_2.jpeg" alt="">
+                </section>
+                <!--FIM-->
+            </section>
+            <!--FIM-->
+
+            <!--EXEMPLO 8-->
+            <section>
+                <h2>EXEMPLO #8 &rightarrow; LIMPAR DADOS</h2>
+                <p>Eliminar todos os registos das tabelas <code>enc_educacao</code> e <code>curso</code>. O comando padrão seria <code>TRUNCATE</code>. Mas, devido à presença de chaves estrangeiras que estão relacionadas a estas tabelas, existe a inclusão da palavra-chave <code>CASCADE</code>.</p>
+                <hr>
+
+                <!--COMANDO A-->
+                <h4>COMANDO &rightarrow; TABELA ENC_EDUCACAO</h4>
+                <section>
+                    <code style="display: block;">
+                        TRUNCATE TABLE enc_educacao CASCADE;
+                    </code>
+                </section>
+                <!--FIM-->
+
+                <!--COMANDO B-->
+                <h4>COMANDO &rightarrow; TABELA CURSO</h4>
+                <section>
+                    <code style="display: block;">
+                        TRUNCATE TABLE curso CASCADE;
+                    </code>
+                </section>
+                <!--FIM-->
+
+                <hr>
+
+                <!--RESULTADO-->
+                <h4>RESULTADO &rightarrow; ELIMINAR DADOS</h4>
+                <section>
+                    <img src="imgs/consulta_manipulacao_dados/exemplo8_1.jpeg" alt="">
+                </section>
+                <section>
+                    <img src="imgs/consulta_manipulacao_dados/exemplo8_2.jpeg" alt="">
+                </section>
+                <!--FIM-->
+            </section>
+            <!--FIM-->
+        </div>
+        <!--FIM-->
+
+        <h4><i>AUXILIARES DE CONSULTA</i></h4>
+        <hr>
+
+        <!--ACORDIÃO JOIN-->
+        <button class="accordion"><b>Join</b> &rightarrow; Comando de junção de duas ou mais tabelas.</button>
+        <!--INICIO-->
+        <div class="panel">
+            <section>
+                <h2>INNER JOIN</h2>
+                <p>O comando <code>INNER JOIN</code> seleciona todos os registos que têm valores comuns entre duas ou mais tabelas.</p>
+                <hr>
+                <h4>SINTAXE &rightarrow; INNER JOIN</h4>
+                <section>
+                    <code style="display: block;">
+                        SELECT [tabela].[coluna], [tabela_relacionada].[coluna], ... <br>
+                        FROM [tabela] <br>
+                        INNER JOIN [tabela_relacionada] ON [tabela].[coluna_relacionada] = [tabela_relacionada].[coluna_relacionada];
+                    </code>
+                </section>
+            </section>
+
+            <section>
+                <h2>LEFT JOIN</h2>
+                <p>O comando <code>LEFT JOIN</code> seleciona todos os registos da tabela da esquerda e os registos que têm valores comuns da tabela da direita. Caso não haja correspondência, é retornado valor <i>NULL</i>.</p>
+                <p><b>OBSERVAÇÃO: Em alguns casos, este comando escreve-se <code>LEFT OUTER JOIN</code></b>.</p>
+                <hr>
+                <h4>SINTAXE &rightarrow; LEFT JOIN</h4>
+                <section>
+                    <code style="display: block;">
+                        SELECT [tabela_esquerda].[coluna], [tabela_direita].[coluna], ... <br>
+                        FROM [tabela_esquerda] <br>
+                        LEFT JOIN [tabela_direita] ON [tabela_esquerda].[coluna_relacionada] = [tabela_direita].[coluna_relacionada];
+                    </code>
+                </section>
+            </section>
+
+            <section>
+                <h2>RIGHT JOIN</h2>
+                <p>O comando <code>RIGHT JOIN</code> seleciona todos os registos da tabela da direita e os registos que têm valores comuns da tabela da esquerda. Caso não haja correspondência, é retornado valor <i>NULL</i></p>
+                <p><b>OBSERVAÇÃO: Em alguns casos, este comando escreve-se <code>RIGHT OUTER JOIN</code></b>.</p>
+                <hr>
+                <h4>SINTAXE &rightarrow; RIGHT JOIN</h4>
+                <section>
+                    <code style="display: block;">
+                        SELECT [tabela_esquerda].[coluna], [tabela_direita].[coluna], ... <br>
+                        FROM [tabela_esquerda] <br>
+                        RIGHT JOIN [tabela_direita] ON [tabela_esquerda].[coluna_relacionada] = [tabela_direita].[coluna_relacionada];
+                    </code>
+                </section>
+            </section>
+
+            <section>
+                <h2>FULL JOIN</h2>
+                <p>O comando <code>FULL JOIN</code> seleciona todos os registos, quer tenham valores correspondentes entre tabelas ou não.</p>
+                <p><b>OBSERVAÇÃO: Em alguns casos, este comando escreve-se <code>FULL OUTER JOIN</code></b>.</p>
+                <hr>
+                <h4>SINTAXE &rightarrow; FULL JOIN</h4>
+                <section>
+                    <code style="display: block;">
+                        SELECT [tabela_esquerda].[coluna], [tabela_direita].[coluna], ... <br>
+                        FROM [tabela_esquerda] <br>
+                        FULL OUTER JOIN [tabela_direita] ON [tabela_esquerda].[coluna_relacionada] = [tabela_direita].[coluna_relacionada];
+                    </code>
+                </section>
+            </section>
+
+            <section>
+                <h2>CROSS JOIN</h2>
+                <p>O comando <code>CROSS JOIN</code> retorna todas as combinações de registos entre duas ou mais tabelas.</p>
+                <hr>
+                <h4>SINTAXE &rightarrow; CROSS JOIN</h4>
+                <section>
+                    <code style="display: block;">
+                        SELECT [tabela].[coluna], [tabela_relacionada].[coluna], ... <br>
+                        FROM [tabela] <br>
+                        CROSS JOIN [tabela_relacionada];
+                    </code>
+                </section>
+            </section>
+        </div>
+        <!--FIM-->
+
+        <!--ACORDIÃO VIEWS-->
+        <button class="accordion"><b>Views</b> &rightarrow; As views e comandos para a sua criação, alteração e eliminação.</button>
+        <!--INICIO-->
+        <div class="panel">
+            <section>
+                <h2>VIEW</h2>
+                <p>Uma <i>view</i> é uma tabela virtual que traduz o resultado de um determinado comando. Estas podem conter colunas de uma ou mais tabelas.</p>
+            </section>
+
+            <section>
+                <h2>CREATE VIEW</h2>
+                <p>O comando <code>CREATE VIEW</code> cria uma view.</p>
+                <hr>
+
+                <h4>SINTAXE &rightarrow; CREATE VIEW</h4>
+                <section>
+                    <code style="display: block;">
+                        CREATE VIEW [view] AS <br>
+                        (consulta...);
+                    </code>
+                    <br>
+                    <p>
+                        <b>
+                            NOTA:
+                            <ul>
+                                <li><code>(consulta...)</code> refere-se ao comando <code>SELECT</code> utilizado para criar a tabela, que pode ser constituído por funções, diferentes operadores, <i>join</i>, entre outros.</li>
+                            </ul>
+                        </b>
+                    </p>
+                </section>
+            </section>
+
+            <section>
+                <h2>CREATE OR REPLACE VIEW</h2>
+                <p>O comando <code>CREATE OR REPLACE VIEW</code> altera uma view, criando uma por cima da já existente.</p>
+                <hr>
+                <h4>SINTAXE &rightarrow; CREATE OR REPLACE VIEW</h4>
+                <section>
+                    <code style="display: block;">
+                        CREATE OR REPLACE VIEW [view_existente] AS <br>
+                        (consulta...);
+                    </code>
+                    <br>
+                    <p>
+                        <b>
+                            NOTA:
+                            <ul>
+                                <li><code>(consulta...)</code> refere-se ao comando <code>SELECT</code> utilizado para criar a tabela, que pode ser constituído por funções, diferentes operadores, <i>join</i>, entre outros.</li>
+                            </ul>
+                        </b>
+                    </p>
+                </section>
+            </section>
+
+            <section>
+                <h2>DROP VIEW</h2>
+                <p>O comando <code>DROP VIEW</code> elimina permanentemente uma view.</p>
+                <hr>
+                <h4>SINTAXE &rightarrow; DROP VIEW</h4>
+                <section>
+                    <code style="display: block;">
+                        DROP VIEW [view];
+                    </code>
+                </section>
+            </section>
+        </div>
+        <!--FIM-->
+
+        <!--ACORDIÃO INDICES-->
+        <button class="accordion"><b>Índices</b> &rightarrow; Os índices e comandos para a sua criação e eliminação.</button>
+        <!--INICIO-->
+        <div class="panel">
+            <section>
+                <h2>ÍNDICE</h2>
+                <p>O índice é um objeto que serve de referência a uma chave, tendo como principal objetivo a otimização das consultas à base de dados.</p>
+                <p>O índice de uma base de dados serve como um índice de um livro. Para encontrar um conteúdo desejado, já que folhear todo o livro custa muito tempo, recorremos ao índice para descobrir em que página se encontra essa informação. O índice numa base de dados faz o mesmo, em vez de procurar informação percorrendo toda a tabela, o SGBD recorre a uma referência direta aos registos desejados.</p>
+                <p>Pesquisar um determinado registo pela chave primária, que é única, é fácil e rápido. Mas procurar registos través de um campo variável, como nome, já exige outro raciocínio. Sem um índice, o SGBD terá de percorrer toda a tabela à procura do nome desejado. Mas, com um índice criado para a coluna <i>nome</i>, o SGBD através de referências, vai diretamente aos registos com o nome a pesquisar, o que economiza tempo, principalmente favorável em bases de dados com grande dimensão.</p>
+                <p>A criação de índices é positiva, mas o seu exagero pode causar ainda mais problemas durante a consulta, pois o SGBD terá de testar qual o melhor índice para pesquisar determinados campos, e esta escolha pode não ser a melhor.</p>
+                <p>Assim, em suma, a criação de índices é útil para campos que são utilizamos como filtros, como nome, idade, curso, e evitar de criar demasiados, pois pode atrasar ainda mais o processo de consulta.</p>
+            </section>
+
+            <section>
+                <h2>CREATE INDEX</h2>
+                <p>O comando <code>CREATE INDEX</code> cria um índice. Este pode ser simples, composto ou único.</p>
+                <hr>
+                <h4>SINTAXE &rightarrow; CREATE INDEX</h4>
+                <section>
+                    <p>Índice simples</p>
+                    <code style="display: block;">
+                        CREATE INDEX [índice] <br>
+                        ON [tabela] ([coluna]); 
+                    </code>
+                    <br>
+                    <p>Índice composto</p>
+                    <code style="display: block;">
+                        CREATE INDEX [índice] <br>
+                        ON [tabela] ([coluna], [coluna], ...); 
+                    </code>
+                    <br>
+                    <p>
+                        <b>
+                            NOTA:
+                            <ul>
+                                <li>As colunas do índice composto devem constituir um conjunto de colunas utilizado para filtar registos, como por exemplo filtrar alunos por <i>ano</i> e <i>curso</i> ao mesmo tempo.</li>
+                            </ul>
+                        </b>
+                    </p>
+                    <br>
+                    <p>Índice único</p>
+                    <code style="display: block;">
+                        CREATE UNIQUE INDEX [índice] <br>
+                        ON [tabela] ([coluna]);
+                    </code>
+                    <br>
+                    <p>
+                        <b>
+                            NOTA:
+                            <ul>
+                                <li>A coluna do índice único não pode conter valores repetidos, como por exemplo <i>email</i>.</li>
+                            </ul>
+                        </b>
+                    </p>
+                </section>
+            </section>
+
+            <section>
+                <h2>DROP INDEX</h2>
+                <p>O comando <code>DROP INDEX</code> elimina permanentemente um índice.</p>
+                <hr>
+                <h4>SINTAXE &rightarrow; DROP INDEX</h4>
+                <section>
+                    <code>
+                        DROP INDEX [nome]; 
+                    </code>
+                </section>
+            </section>
+        </div>
+        <!--FIM-->
+
+        <!--ACORDIÃO EXEMPLOS-->
+        <button class="accordion"><b>Exemplos</b> &rightarrow; Exemplificação dos conceitos abordados nesta categoria.</button>
+        <!--INICIO-->
+        <div class="panel">
+            <!--PREPARAÇÃO-->
+            <section>
+                <h2>PREPARAÇÃO</h2>
+                <p>Para simplificar exemplos ao nível do <code>JOIN</code>, foram criadas duas novas tabelas: <code>clientes</code> e <code>encomendas</code>. Posteriormente, foram carregados com alguns registos.</p>
+                <hr>
+
+                <section>
+                    <img src="imgs/preparacao/img1.jpeg" alt="">
+                </section>
+                <section>
+                    <img src="imgs/preparacao/img2.jpeg" alt="">
+                </section>
+            </section>
+            <!--FIM-->
+
+            <!--EXEMPLO 1-->
+            <section>
+                <h2>EXEMPLO #1 &rightarrow; INNER JOIN</h2>
+                <p>Realização de um <code>INNER JOIN</code> nas tabelas <code>clientes</code> e <code>encomendas</code>.</p>
+                <hr>
+
+                <!--CARREGAMENTO TABELA CURSO-->
+                <h4>COMANDO &rightarrow; INNER JOIN</h4>
+                <section>
+                    <code style="display: block;">
+                        SELECT * <br>
+                        FROM cliente <br>
+                        INNER JOIN encomenda ON cliente.cliente_id = encomenda.cliente_id;
+                    </code>
+                </section>
+
+                <hr>
+
+                <!--RESULTADO-->
+                <h4>RESULTADO &rightarrow; INNER JOIN</h4>
+                <section>
+                    <img src="imgs/join/inner_join.jpeg" alt="">
+                </section>
+                <!--FIM-->
+            </section>
+            <!--FIM-->
+
+            <!--EXEMPLO 2-->
+            <section>
+                <h2>EXEMPLO #2 &rightarrow; LEFT JOIN</h2>
+                <p>Realização de um <code>LEFT JOIN</code> nas tabelas <code>clientes</code> e <code>encomendas</code>.</p>
+                <hr>
+
+                <!--CARREGAMENTO TABELA CURSO-->
+                <h4>COMANDO &rightarrow; INNER JOIN</h4>
+                <section>
+                    <code style="display: block;">
+                        SELECT * <br>
+                        FROM clientes <br>
+                        LEFT JOIN encomendas ON clientes.cliente_id = encomendas.cliente_id;
+                    </code>
+                </section>
+
+                <hr>
+
+                <!--RESULTADO-->
+                <h4>RESULTADO &rightarrow; LEFT JOIN</h4>
+                <section>
+                    <img src="imgs/join/left_join.jpeg" alt="">
+                </section>
+                <!--FIM-->
+            </section>
+            <!--FIM-->
+
+            <!--EXEMPLO 3-->
+            <section>
+                <h2>EXEMPLO #3 &rightarrow; RIGHT JOIN</h2>
+                <p>Realização de um <code>RIGHT JOIN</code> nas tabelas <code>clientes</code> e <code>encomendas</code>.</p>
+                <hr>
+
+                <!--CARREGAMENTO TABELA CURSO-->
+                <h4>COMANDO &rightarrow; INNER JOIN</h4>
+                <section>
+                    <code style="display: block;">
+                        SELECT * <br>
+                        FROM clientes <br>
+                        RIGHT JOIN encomendas ON clientes.cliente_id = encomendas.cliente_id;
+                    </code>
+                </section>
+
+                <hr>
+
+                <!--RESULTADO-->
+                <h4>RESULTADO &rightarrow; RIGHT JOIN</h4>
+                <section>
+                    <img src="imgs/join/right_join.jpeg" alt="">
+                </section>
+                <!--FIM-->
+            </section>
+            <!--FIM-->
+
+            <!--EXEMPLO 4-->
+            <section>
+                <h2>EXEMPLO #4 &rightarrow; FULL JOIN</h2>
+                <p>Realização de um <code>FULL JOIN</code> nas tabelas <code>clientes</code> e <code>encomendas</code>.</p>
+                <hr>
+
+                <!--CARREGAMENTO TABELA CURSO-->
+                <h4>COMANDO &rightarrow; FULL JOIN</h4>
+                <section>
+                    <code style="display: block;">
+                        SELECT * <br>
+                        FROM clientes <br>
+                        FULL JOIN encomendas ON clientes.cliente_id = encomendas.cliente_id;
+                    </code>
+                </section>
+
+                <hr>
+
+                <!--RESULTADO-->
+                <h4>RESULTADO &rightarrow; FULL JOIN</h4>
+                <section>
+                    <img src="imgs/join/full_join.jpeg" alt="">
+                </section>
+                <!--FIM-->
+            </section>
+            <!--FIM-->
+
+            <!--EXEMPLO 5-->
+            <section>
+                <h2>EXEMPLO #5 &rightarrow; CROSS JOIN</h2>
+                <p>Realização de um <code>CROSS JOIN</code> nas tabelas <code>clientes</code> e <code>encomendas</code>.</p>
+                <hr>
+
+                <!--CARREGAMENTO TABELA CURSO-->
+                <h4>COMANDO &rightarrow; CROSS JOIN</h4>
+                <section>
+                    <code style="display: block;">
+                        SELECT * <br>
+                        FROM cliente <br>
+                        CROSS JOIN encomenda;
+                    </code>
+                </section>
+
+                <hr>
+
+                <!--RESULTADO-->
+                <h4>RESULTADO &rightarrow; CROSS JOIN</h4>
+                <section>
+                    <img src="imgs/join/cross_join.jpeg" alt="">
+                </section>
+                <!--FIM-->
+            </section>
+            <!--FIM-->
+
+            <!--EXEMPLO 6-->
+            <section>
+                <h2>EXEMPLO #6 &rightarrow; ATUALIZAÇÃO DE DADOS</h2>
+                <p>Atualizar o email de todos os registos da tabela e alterar o curso do registo de código <i>5</i>.</p>
+                <hr>
+
+                <!--COMANDO A-->
+                <h4>COMANDO &rightarrow; ALTERAR REGISTO ÚNICO</h4>
+                <section>
+                    <code style="display: block;">
+                        UPDATE aluno <br>
+                        SET id_ano_curso = 2 <br>
+                        WHERE id_aluno = 5;
+                    </code>
+                </section>
+                <!--FIM-->
+
+                <!--COMANDO B-->
+                <h4>COMANDO &rightarrow; ALTERAR TODOS OS REGISTOS</h4>
+                <section>
+                    <code style="display: block;">
+                        UPDATE aluno <br>
+                        SET morada = 'Rua Igual, Vila Nova de Gaia';
+                    </code>
+                </section>
+                <!--FIM-->
+
+                <hr>
+
+                <!--RESULTADO-->
+                <h4>RESULTADO &rightarrow; ATUALIZAÇÃO DE DADOS</h4>
+                <section>
+                    <img src="imgs/consulta_manipulacao_dados/exemplo6.jpeg" alt="">
+                </section>
+                <!--FIM-->
+            </section>
+            <!--FIM-->
+
+            <!--EXEMPLO 7-->
+            <section>
+                <h2>EXEMPLO #7 &rightarrow; ELIMINAR DADOS</h2>
+                <p>Eliminar todos os registos da tabela <code>aluno</code> e eliminar o encarregado de educação com maior idade.</p>
+
+                <!--COMANDO A-->
+                <h4>COMANDO &rightarrow; ELIMINAR TODOS OS REGISTOS</h4>
+                <section>
+                    <code style="display: block;">
+                        DELETE FROM aluno;
+                    </code>
+                </section>
+                <!--FIM-->
+
+                <!--COMANDO B-->
+                <h4>COMANDO &rightarrow; ELIMINAR UM REGISTO</h4>
+                <section>
+                    <code style="display: block;">
+                        DELETE FROM enc_educacao <br>
+                        WHERE idade = (SELECT MAX(idade) FROM enc_educacao);
+                    </code>
+                </section>
+                <!--FIM-->
+
+                <hr>
+
+                <!--RESULTADO-->
+                <h4>RESULTADO &rightarrow; ELIMINAR DADOS</h4>
+                <section>
+                    <img src="imgs/consulta_manipulacao_dados/exemplo7_1.jpeg" alt="">
+                </section>
+                <section>
+                    <img src="imgs/consulta_manipulacao_dados/exemplo7_2.jpeg" alt="">
+                </section>
+                <!--FIM-->
+            </section>
+            <!--FIM-->
+
+            <!--EXEMPLO 8-->
+            <section>
+                <h2>EXEMPLO #8 &rightarrow; LIMPAR DADOS</h2>
+                <p>Eliminar todos os registos das tabelas <code>enc_educacao</code> e <code>curso</code>. O comando padrão seria <code>TRUNCATE</code>. Mas, devido à presença de chaves estrangeiras que estão relacionadas a estas tabelas, existe a inclusão da palavra-chave <code>CASCADE</code>.</p>
+                <hr>
+
+                <!--COMANDO A-->
+                <h4>COMANDO &rightarrow; TABELA ENC_EDUCACAO</h4>
+                <section>
+                    <code style="display: block;">
+                        TRUNCATE TABLE enc_educacao CASCADE;
+                    </code>
+                </section>
+                <!--FIM-->
+
+                <!--COMANDO B-->
+                <h4>COMANDO &rightarrow; TABELA CURSO</h4>
+                <section>
+                    <code style="display: block;">
+                        TRUNCATE TABLE curso CASCADE;
+                    </code>
+                </section>
+                <!--FIM-->
+
+                <hr>
+
+                <!--RESULTADO-->
+                <h4>RESULTADO &rightarrow; ELIMINAR DADOS</h4>
+                <section>
+                    <img src="imgs/consulta_manipulacao_dados/exemplo8_1.jpeg" alt="">
+                </section>
+                <section>
+                    <img src="imgs/consulta_manipulacao_dados/exemplo8_2.jpeg" alt="">
+                </section>
+                <!--FIM-->
+            </section>
+            <!--FIM-->
+        </div>
+        <!--FIM-->
+
+        <h4><i>OUTROS CONCEITOS</i></h4>
+        <hr>
+
+        <!--ACORDIÃO SQL DATA TYPES-->
+        <button class="accordion"><b>SQL Data Types</b> &rightarrow; Tipos de dados em SQL.</button>
+        <!--INÍCIO-->
+        <div class="panel">
+            <section>
+                <h2>SQL Data Types</h2>
+                <p>Os tipos de dados em SQL definem o tipo de valor que pode ser armazenado em uma coluna de tabela. Por exemplo, se você deseja que uma coluna armazene apenas valores inteiros, você pode definir seu tipo de dados como INT.</p>
+                
+                <h3>Numeric data types</h3>
+                <ul>
+                    <li>BIT</li>
+                    <li>TINYINT</li>
+                    <li>SMALLINT</li>
+                    <li>INT</li>
+                    <li>BIGINT</li>
+                    <li>DECIMAL</li>
+                    <li>NUMERIC</li>
+                    <li>FLOAT</li>
+                    <li>REAL</li>
+                </ul>
+                
+                <h3>Date and Time data types</h3>
+                <ul>
+                    <li>DATE</li>
+                    <li>TIME</li>
+                    <li>DATETIME</li>
+                    <li>TIMESTAMP</li>
+                    <li>YEAR</li>
+                </ul>
+                
+                <h3>Character and String data types</h3>
+                <ul>
+                    <li>CHAR</li>
+                    <li>VARCHAR</li>
+                    <li>VARCHAR(max)</li>
+                    <li>TEXT</li>
+                </ul>
+                
+                <h3>Unicode character string data types</h3>
+                <ul>
+                    <li>NCHAR</li>
+                    <li>NVARCHAR</li>
+                    <li>NVARCHAR(max)</li>
+                    <li>NTEXT</li>
+                </ul>
+                
+                <h3>Binary data types</h3>
+                <ul>
+                    <li>BINARY</li>
+                    <li>VARBINARY</li>
+                    <li>VARBINARY(max)</li>
+                    <li>IMAGE</li>
+                </ul>
+                
+                <h3>Miscellaneous data types</h3>
+                <ul>
+                    <li>CLOB</li>
+                    <li>BLOB</li>
+                    <li>XML</li>
+                    <li>JSON</li>
+                </ul>
+            </section>
+        </div>
+        <!--FIM-->
+
+    </section>
+    
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,219 @@
+header {
+    background-color: #2E8B57; /* Um verde suave */
+    color: #fff; /* Texto branco */
+    padding: 20px 0; /* Espaçamento interno */
+    text-align: center; /* Alinhamento do texto */
+    font-size: 24px; /* Tamanho da fonte */
+    font-family: Arial, sans-serif; /* Fonte */
+    position: fixed; /* Posicionamento fixo para manter o cabeçalho no topo */
+    top: 0; /* Posicionamento no topo */
+    left: 0; /* Centralizar horizontalmente */
+    right: 0; /* Centralizar horizontalmente */
+    width: 100%; /* Largura total */
+    z-index: 1000; /* Z-index para garantir que o cabeçalho fique acima de outros elementos */
+    transition: background-color 0.5s; /* Transição de cor de fundo */
+    animation: leds 5s infinite alternate; /* Animação dos LEDs */
+    margin-bottom: 80px; /* Adicionar margem inferior para compensar o posicionamento fixo do cabeçalho */
+}
+
+/* Efeito de piscar dos LEDs */
+@keyframes leds {
+    0% {
+        background-color: #347024; /* Verde suave */
+    }
+    25%{
+        background-color: #2d993c; /* Verde suave */
+    }
+    50% {
+        background-color: #2dbd2d; /* Verde mais intenso */
+    }
+    75%{
+        background-color: #2d993c;
+    }
+    100% {
+        background-color: #347024; /* Verde suave */
+    }
+}
+
+/* Estilos do título */
+header h1 {
+    margin: 0; /* Remover margem */
+    letter-spacing: 2px; /* Espaçamento entre letras */
+}
+
+/* Efeito de hover */
+header:hover {
+    background-color: #3CB371; /* Um tom mais escuro de verde ao passar o mouse */
+}
+
+body {
+    border-radius: 8px; /* Adicionar bordas arredondadas */
+    padding: 20px; /* Adicionar espaçamento interno */
+    margin-top: 80px; /* Adicionar margem superior para compensar o posicionamento fixo do cabeçalho */
+    background-color: #f5f5f5; /* Cor de fundo do corpo, uma cor neutra */
+}
+
+/* Estilo dos botões usados para abrir e fechar o painel do acordeão */
+.accordion {
+    background-color: #f0f0f0; /* Uma cor neutra */
+    color: #2E8B57; /* Um verde mais escuro para o texto */
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+    border-bottom: 1px solid #bbb; /* Adicionar borda inferior */
+}
+
+/* Adicionar uma cor de fundo ao botão se clicado (adicionar a classe .active com JS) e quando passar o mouse sobre ele (hover) */
+.active, .accordion:hover {
+    background-color: #e5e5e5; /* Um tom mais claro de cor neutra ao passar o mouse */
+}
+
+/* Estilo do painel do acordeão. Nota: oculto por padrão */
+.panel {
+    padding: 0 18px;
+    background-color: #669260; /* Cor de fundo branca */
+    max-height: 0; /* Ajustar conforme necessário */
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Adicionar sombra */
+    border-radius: 4px; /* Adicionar bordas arredondadas */
+    margin-bottom: 12px; /* Adicionar espaçamento entre os painéis */
+}
+
+/* Ícone de seta */
+.accordion:after {
+    content: '\02795'; /* Caractere Unicode para o sinal de mais (+) */
+    font-size: 13px;
+    color: #777;
+    float: right;
+    margin-left: 5px;
+}
+
+.active:after {
+    content: "\2796"; /* Caractere Unicode para o sinal de menos (-) */
+}
+
+/* Estilo do título da subseção */
+.panel h2 {
+    margin-top: 0; /* Remover margem superior do título */
+    padding-top: 12px; /* Adicionar espaçamento acima do título */
+}
+
+/* Estilo do texto do parágrafo */
+.panel p {
+    margin-top: 8px; /* Adicionar espaçamento entre os parágrafos */
+}
+
+.accordion-content {
+    overflow-y: auto;
+    max-height: 200px; /* Ajustar conforme necessário */
+}
+
+code {
+    background-color: #f0f0f0;
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+section {
+    margin: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    overflow: hidden;
+}
+
+.content {
+    display: flex; /* Usando flexbox para organizar os elementos */
+    flex-wrap: wrap; /* Quebrar linha quando necessário */
+}
+
+.text {
+    flex-basis: 70%; /* Largura do texto */
+    padding-right: 20px; /* Espaçamento à direita para separar o texto da imagem */
+}
+
+hr {
+    width: 100%; /* Garantir que a linha horizontal se estenda por toda a largura */
+}
+
+.image {
+    flex-basis: 25%; /* Largura da imagem */
+    text-align: center; /* Centralizar a imagem horizontalmente */
+}
+
+.image img {
+    max-width: 100%; /* Imagem responsiva (largura máxima de 100%) */
+    height: auto; /* Altura automática proporcional à largura */
+}
+
+.image-section {
+    float: left; /* Fazer com que as seções fiquem uma ao lado da outra */
+    width: 50%; /* Cada seção ocupa metade da largura */
+    box-sizing: border-box; /* Incluir padding e borda no tamanho total */
+    padding: 10px; /* Espaçamento interno */
+}
+
+.image-section img {
+    display: block; /* Impedir que as imagens fiquem com espaços em branco abaixo delas */
+    max-width: 100%; /* Ajustar as imagens ao tamanho das seções */
+    height: auto; /* Manter a proporção da imagem */
+}
+
+.section-block {
+    display: flex; /* Utilizar flexbox */
+    align-items: stretch; /* Esticar as seções para a altura do contêiner */
+}
+
+.top-sections {
+    display: flex; /* Utilizar flexbox */
+    flex-direction: column; /* Colocar as seções uma em cima da outra */
+    width: 50%; /* Cada seção ocupará metade da largura do contêiner */
+}
+
+.image-section {
+    width: 50%; /* Cada seção ocupará metade da largura do contêiner */
+    padding: 10px; /* Espaçamento interno */
+    box-sizing: border-box; /* Incluir padding e borda no tamanho total */
+}
+
+.image-section img {
+    width: 100%; /* Imagem ocupará toda a largura da seção */
+    height: 100%; /* Imagem ocupará toda a altura da seção */
+    object-fit: cover; /* Manter a proporção da imagem e cobrir o espaço disponível */
+    border-radius: 10px; /* Adicionar bordas arredondadas */
+}
+
+.subtitle {
+    position: absolute; /* Posicionamento absoluto em relação ao contêiner pai */
+    white-space: nowrap; /* Evita que o texto quebre */
+    animation: moveText 17s linear infinite; /* Animação de movimento */
+    transition: transform 1s ease; /* Adiciona uma transição suave */
+    transform: translateX(-100%); /* Começa fora da tela à esquerda */
+    left: 0; /* Alinha o texto à esquerda do contêiner pai */
+    top: 80%; /* Alinha verticalmente o texto ao centro do contêiner pai */
+    transform-origin: left center; /* Define o ponto de origem da transformação */
+    font-size: 15px; /* Tamanho da fonte */
+}
+
+@keyframes moveText {
+    0% {
+        transform: translateX(-100%); /* Fora da tela à esquerda */
+    }
+    100% {
+        transform: translateX(calc(100vw + 100%)); /* Move para além do limite direito da tela */
+    }
+}
+
+h5 {
+    margin: 0; /* Remover margem */
+    padding: 10px 0; /* Adicionar espaçamento interno */
+    font-size: 15px; /* Tamanho da fonte */
+    font-family: Arial, sans-serif; /* Fonte */
+}
