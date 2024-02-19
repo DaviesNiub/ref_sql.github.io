@@ -19,17 +19,15 @@
         <p>Neste trabalho estão documentados diversos conceitos/comandos de SQL necessários para a manutenção de uma base de dados.</p>
         <p>A estrutura consiste em vários <i>cards</i> que contém informação sobre cada conceito: o que faz e a sua sintaxe. Ainda dentro da categoria, são mostrados exemplos práticos da sua utilização. Estes exemplos serão realizados no Supabase, Sistema Gestor de Base de Dados (SGBD) relacional, cuja <i>engine</i> é PostgreSQL, outro SGBD relacional.</p>
         <p>São ainda apresentadas as sintaxes dos SGBD Access, MySQL e PostgreSQL.</p>
-        <p>
-            <b>NOTA: 
-                <ul>
-                    <li>Não estão presentes todos os conceitos e comandos de SQL, apenas o necessário para a realização da disciplina de Implementação e Exploração de Bases de Dados;</li>
-                    <li>Os exemplos podem mostrar falhas ao nível da normalização de dados.</li>
-                </ul>
-            </b>
-        </p>
-        <br>
     </section>
     <!--FIM-->
+
+    <section>
+        <b>
+            <li>Não estão presentes todos os conceitos e comandos de SQL, apenas o necessário para a realização da disciplina de Implementação e Exploração de Bases de Dados;</li>
+            <li>Os exemplos podem mostrar falhas ao nível da normalização de dados.</li>
+        </b>
+    </section>
 
     <section>
         <h4><i>ENQUADRAMENTO TEÓRICO</i></h4>
@@ -2236,41 +2234,37 @@
                 <hr>
                 <h4>SINTAXE &rightarrow; CREATE INDEX</h4>
                 <section>
-                    <p>Índice simples</p>
-                    <code style="display: block;">
-                        CREATE INDEX [índice] <br>
-                        ON [tabela] ([coluna]); 
-                    </code>
-                    <br>
-                    <p>Índice composto</p>
-                    <code style="display: block;">
-                        CREATE INDEX [índice] <br>
-                        ON [tabela] ([coluna], [coluna], ...); 
-                    </code>
-                    <br>
-                    <p>
-                        <b>
-                            NOTA:
-                            <ul>
-                                <li>As colunas do índice composto devem constituir um conjunto de colunas utilizado para filtar registos, como por exemplo filtrar alunos por <i>ano</i> e <i>curso</i> ao mesmo tempo.</li>
-                            </ul>
-                        </b>
-                    </p>
-                    <br>
-                    <p>Índice único</p>
-                    <code style="display: block;">
-                        CREATE UNIQUE INDEX [índice] <br>
-                        ON [tabela] ([coluna]);
-                    </code>
-                    <br>
-                    <p>
-                        <b>
-                            NOTA:
-                            <ul>
-                                <li>A coluna do índice único não pode conter valores repetidos, como por exemplo <i>email</i>.</li>
-                            </ul>
-                        </b>
-                    </p>
+                    <section>
+                        <h4>SINTAXE &rightarrow; INDEX SIMPLES</h4>
+                        <section>
+                            <code style="display: block;">
+                                CREATE INDEX [índice] <br>
+                                ON [tabela] ([coluna]); 
+                            </code>
+                        </section>
+                    </section>
+
+                    <section>
+                        <h4>SINTAXE &rightarrow; INDEX COMPOSTO</h4>
+                        <section>
+                            <code style="display: block;">
+                                CREATE INDEX [índice] <br>
+                                ON [tabela] ([coluna], [coluna], ...); 
+                            </code>
+                            <p><b> OBSERVAÇÃO:As colunas do índice composto devem constituir um conjunto de colunas utilizado para filtar registos, como por exemplo filtrar alunos por <i>ano</i> e <i>curso</i> ao mesmo tempo.</b></p>
+                        </section>
+                    </section>
+
+                    <section>
+                        <h4>SINTAXE &rightarrow; INDEX ÚNICO</h4>
+                        <section>
+                            <code style="display: block;">
+                                CREATE UNIQUE INDEX [índice] <br>
+                                ON [tabela] ([coluna]);
+                            </code>
+                            <p><b>OBSERVAÇÃO: A coluna do índice único não pode conter valores repetidos, como por exemplo <i>email</i>.</b></p>
+                        </section>
+                    </section>
                 </section>
             </section>
 
