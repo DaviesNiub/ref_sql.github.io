@@ -321,7 +321,7 @@
                 <section>
                     <h4>SINTAXE &rightarrow; ELIMINAR CHAVE PRIMÁRIA</h4>
                     <section>
-                        <h5>Access | SQL Server | Oracle | PostgreSQL</h5>
+                        <h5>Access | PostgreSQL</h5>
                         <code style="display: block;">
                             ALTER TABLE [tabela] <br>
                             DROP CONSTRAINT [nome_chave];
@@ -439,7 +439,7 @@
                 <section>
                     <h4>SINTAXE &rightarrow; ELIMINAR CHAVE ESTRANGEIRA</h4>
                     <section>
-                        <h5>Access | SQL Server | Oracle | PostgreSQL</h5>
+                        <h5>Access | PostgreSQL</h5>
                         <code style="display: block;">
                             ALTER TABLE [tabela] <br>
                             DROP CONSTRAINT [nome_chave];
@@ -503,7 +503,7 @@
                 <!--SINTAXE NOT NULL ALTER TABLE-->
                 <h4>SINTAXE &rightarrow; NOT NULL + ALTER TABLE</h4>
                 <section>
-                    <h5>Access | SQL Server</h5>
+                    <h5>Access</h5>
                     <code style="display: block;">
                         ALTER TABLE [tabela] <br>
                         ALTER COLUMN [coluna] [tipo] NOT NULL;
@@ -513,12 +513,6 @@
                     <code style="display: block;">
                         ALTER TABLE [tabela] <br>
                         MODIFY COLUMN [coluna] [tipo] NOT NULL;
-                    </code>
-                    <br>
-                    <h5>Oracle (Versão 10+)</h5>
-                    <code style="display: block;">
-                        ALTER TABLE [tabela] <br>
-                        MODIFY [coluna] [tipo] NOT NULL;
                     </code>
                     <br>
                     <h5>PostgreSQL</h5>
@@ -532,8 +526,9 @@
                 <!--NOTA-->
                 <section>
                     <b>
-                        <li>Excluindo o PostgreSQL, a sintaxe apresentada pode ser utilizada para remover a <i>constraint</i> <code>NOT NULL</code>, omitindo essa mesma expressão, já que o comando reescreve a coluna;</li>
+                        <li>Excluindo o PostgreSQL e Access, a sintaxe apresentada pode ser utilizada para remover a <i>constraint</i> <code>NOT NULL</code>, omitindo essa mesma expressão, já que o comando reescreve a coluna;</li>
                         <li>Em PostgreSQL, para eliminar a <i>constraint</i> <code>NOT NULL</code>, basta substituir a palavra-chave <code>SET</code> por <code>DROP</code>.</li>
+                        <li>Em Access, é recomendável retirar a <i>constraint</i> <code>NOT NULL</code> através da interface gráfica.</li>
                     </b>
                 </section>
                 <!--FIM-->
@@ -600,7 +595,7 @@
                             ADD CONSTRAINT [nome_restrição] UNIQUE ([coluna]);
                         </code>
                         <br>
-                        <h5>MySQL | SQL Server | Oracle | PostgreSQL</h5>
+                        <h5>Access | MySQL | PostgreSQL</h5>
                         <code style="display: block;">
                             ALTER TABLE [tabela] <br>
                             ADD UNIQUE ([coluna]);
@@ -625,7 +620,7 @@
                 <section>
                     <h4>SINTAXE &rightarrow; ELIMINAR UNIQUE</h4>
                     <section>
-                        <h5>Access | SQL Server | Oracle | PostgreSQL</h5>
+                        <h5>Access | PostgreSQL</h5>
                         <code style="display: block;">
                             ALTER TABLE [tabela] <br>
                             DROP CONSTRAINT [nome_chave];
@@ -719,7 +714,7 @@
                 <section>
                     <h4>SINTAXE &rightarrow; ELIMINAR CHECK</h4>
                     <section>
-                        <h5>Access | SQL Server | Oracle | PostgreSQL</h5>
+                        <h5>Access | PostgreSQL</h5>
                         <code style="display: block;">
                             ALTER TABLE [tabela] <br>
                             DROP CONSTRAINT [nome_chave];
@@ -765,29 +760,9 @@
                 <section>
                     <h4>SINTAXE &rightarrow; DEFAULT</h4>
                     <section>
-                        <h5>Access | MySQL | PostgreSQL</h5>
                         <code style="display: block;">
                             ALTER TABLE [tabela] <br>
                             ALTER COLUMN [coluna] SET DEFAULT [valor_padrão];
-                        </code>
-                        <br>    
-                        <h5>MySQL</h5>
-                        <code style="display: block;">
-                            ALTER TABLE [tabela] <br>
-                            ALTER [coluna] SET DEFAULT [valor_padrão];
-                        </code>
-                        <br> 
-                        <h5>SQL Server</h5>
-                        <code style="display: block;">
-                            ALTER TABLE [tabela] <br>
-                            ADD CONSTRAINT [nome_chave] <br>
-                            DEFAULT [valor_padrão] FOR [coluna];
-                        </code>
-                        <br>    
-                        <h5>Oracle</h5>
-                        <code style="display: block;">
-                            ALTER TABLE [tabela] <br>
-                            MODIFY [coluna] DEFAULT [valor_padrão];
                         </code>
                     </section>
                 </section>
@@ -799,16 +774,9 @@
                 <section>
                     <h4>SINTAXE &rightarrow; ELIMINAR DEFAULT</h4>
                     <section>
-                        <h5>Access | SQL Server | Oracle | PostgreSQL</h5>
                         <code style="display: block;">
                             ALTER TABLE [tabela] <br>
                             ALTER COLUMN [coluna] DROP DEFAULT;
-                        </code>
-                        <br>
-                        <h5>MySQL</h5>
-                        <code style="display: block;">
-                            ALTER TABLE [tabela] <br>
-                            ALTER [coluna] DROP DEFAULT;
                         </code>
                     </section>
                 </section>
@@ -979,19 +947,13 @@
                 </section>
                 <!---->
                 <section>
-                    <h5>Access | SQL Server</h5>
+                    <h5>Access</h5>
                     <code style="display: block;">
                         ALTER TABLE aluno <br>
                         ALTER COLUMN morada TEXT;
                     </code>
                     <br>
                     <h5>MySQL</h5>
-                    <code style="display: block;">
-                        ALTER TABLE aluno <br>
-                        MODIFY COLUMN morada TYPE TEXT;
-                    </code>
-                    <br>
-                    <h5>Oracle (Versão 10+)</h5>
                     <code style="display: block;">
                         ALTER TABLE aluno <br>
                         MODIFY COLUMN morada TEXT;
@@ -1326,7 +1288,7 @@
                 <!--SINTAXE TOP/LIMIT-->
                 <h4>SINTAXE &rightarrow; TOP/LIMIT</h4>
                 <section>
-                    <h5>Access | SQL Server</h5>
+                    <h5>Access</h5>
                     <code style="display: block;">
                         SELECT TOP [número/percentagem] [coluna], [coluna], ... <br>
                         FROM [tabela] <br>
@@ -1341,15 +1303,6 @@
                         WHERE [condição]; <br>
                         ORDER BY [coluna], [coluna], ... <br>
                         LIMIT [número];
-                    </code>
-                    <br>
-                    <h5>Oracle (Versão 12+)</h5>
-                    <code style="display: block;">
-                        SELECT [coluna], [coluna], ... <br>
-                        FROM [tabela] <br>
-                        WHERE [condição]; <br>
-                        ORDER BY [coluna], [coluna], ... <br>
-                        FETCH FIRST [número] ROWS ONLY;
                     </code>
                 </section>
                 <!--FIM TOP/LIMIT-->
