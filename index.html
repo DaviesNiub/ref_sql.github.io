@@ -18,7 +18,7 @@
         <hr>
         <p>Neste trabalho estão documentados diversos conceitos/comandos de SQL necessários para a manutenção de uma base de dados.</p>
         <p>A estrutura consiste em vários <i>cards</i> que contém informação sobre cada conceito: o que faz e a sua sintaxe. Ainda dentro da categoria, são mostrados exemplos práticos da sua utilização. Estes exemplos serão realizados no Supabase, Sistema Gestor de Base de Dados (SGBD) relacional, cuja <i>engine</i> é PostgreSQL, outro SGBD relacional.</p>
-        <p>São ainda apresentadas as sintaxes dos SGBD Access, MySQL e PostgreSQL.</p>
+        <p>São apresentadas as sintaxes dos SGBD Access, MySQL e PostgreSQL. Nos casos de serem iguais, são omitidas as legendas que especificam o SGBD.</p>
     </section>
     <!--FIM-->
 
@@ -137,7 +137,7 @@
                 <!--SINTAXE ALTER TABLE ALTER/MODIFY COLUMN-->
                 <h4>SINTAXE &rightarrow; ALTER/MODIFY COLUMN</h4>
                 <section>
-                    <h5>Access | SQL Server</h5>
+                    <h5>Access</h5>
                     <code style="display: block;">
                         ALTER TABLE [tabela]<br>
                         ALTER COLUMN [coluna] [tipo_novo];
@@ -146,15 +146,8 @@
                     <h5>MySQL</h5>
                     <code style="display: block;">
                         ALTER TABLE [tabela]<br>
-                        MODIFY COLUMN [coluna] TYPE [tipo_novo];
+                        MODIFY COLUMN [coluna] [tipo_novo];
                     </code>
-                    <br>
-                    <h5>Oracle (Versão 10+)</h5>
-                    <code style="display: block;">
-                        ALTER TABLE [tabela]<br>
-                        MODIFY ([coluna] [tipo_novo]);
-                    </code>
-                    <p><b>OBSERVAÇÃO: Em Oracle, não é estritamente necessária a utilização de parêntesis, embora seja uma boa prática.</b></p>
                     <br>
                     <h5>PostgreSQL</h5>
                     <code style="display: block;">
@@ -167,7 +160,7 @@
                 <!--NOTA-->
                 <section>
                     <b>
-                        <li>As sintaxes em Access e SQL Server, MySQL e Oracle poderão não estar corretas.</li>
+                        <li>Em todas as sintaxes, a palavra-chave <code>COLUMN</code> pode ser omitida.</li>
                         <li>A troca de tipos de dados apresentada é feita dentro da mesma categoria. Exemplificando, caso a coluna seja do tipo inteiro, só pode ser trocado diretamente para um tipo numérico.</li>
                     </b>        
                 </section>
@@ -282,7 +275,6 @@
                 <!--NOTA-->
                 <section>               
                     <b>
-                        <li>Sintaxe em Access, MySQL, SQL Server e Oracle não foi testada;</li>
                         <li>O nome padrão da chave primária muda consoante o SGBD. Exemplificando, para uma tabela <i>aluno</i>, em PostgreSQL o nome padrão é <code>aluno_pkey</code>, e em SQL Server e Oracle é <code>aluno_PK</code>.</li>
                     </b>
                 </section>
