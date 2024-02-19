@@ -2171,6 +2171,7 @@
             <section>
                 <h2>VIEW</h2>
                 <p>Uma <i>view</i> é uma tabela virtual que traduz o resultado de um determinado comando. Estas podem conter colunas de uma ou mais tabelas.</p>
+                <p>As <i>views</i>, portanto, permitem a criação de uma tabela a partir de uma consulta, poupando trabalho exaustivo ao criar consultas complexas à base de dados. Outro ponto a ser mencionado é a sua utilidade na questão de obter diferentes dados das mesmas tabelas de forma constante.</p>
             </section>
 
             <section>
@@ -2184,15 +2185,7 @@
                         CREATE VIEW [view] AS <br>
                         (consulta...);
                     </code>
-                    <br>
-                    <p>
-                        <b>
-                            NOTA:
-                            <ul>
-                                <li><code>(consulta...)</code> refere-se ao comando <code>SELECT</code> utilizado para criar a tabela, que pode ser constituído por funções, diferentes operadores, <i>join</i>, entre outros.</li>
-                            </ul>
-                        </b>
-                    </p>
+                    <p><b>OBSERVAÇÃO: <code>(consulta...)</code> refere-se ao comando <code>SELECT</code> utilizado para criar a tabela, que pode ser constituído por funções, diferentes operadores, <i>join</i>, entre outros.</b></p>
                 </section>
             </section>
 
@@ -2206,15 +2199,7 @@
                         CREATE OR REPLACE VIEW [view_existente] AS <br>
                         (consulta...);
                     </code>
-                    <br>
-                    <p>
-                        <b>
-                            NOTA:
-                            <ul>
-                                <li><code>(consulta...)</code> refere-se ao comando <code>SELECT</code> utilizado para criar a tabela, que pode ser constituído por funções, diferentes operadores, <i>join</i>, entre outros.</li>
-                            </ul>
-                        </b>
-                    </p>
+                    <p><b>OBSERVAÇÃO: <code>(consulta...)</code> refere-se ao comando <code>SELECT</code> utilizado para criar a tabela, que pode ser constituído por funções, diferentes operadores, <i>join</i>, entre outros.</b></p>
                 </section>
             </section>
 
