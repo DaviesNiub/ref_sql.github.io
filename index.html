@@ -2458,27 +2458,18 @@
 
             <!--EXEMPLO 6-->
             <section>
-                <h2>EXEMPLO #6 &rightarrow; ATUALIZAÇÃO DE DADOS</h2>
-                <p>Atualizar o email de todos os registos da tabela e alterar o curso do registo de código <i>5</i>.</p>
+                <h2>EXEMPLO #6 &rightarrow; CRIAÇÃO DE VIEW</h2>
+                <p>Criar uma <i>view</i> que mostre o nome e morada do cliente e o conteúdo da sua encomenda.</p>
                 <hr>
 
                 <!--COMANDO A-->
-                <h4>COMANDO &rightarrow; ALTERAR REGISTO ÚNICO</h4>
+                <h4>COMANDO &rightarrow; CREATE VIEW</h4>
                 <section>
                     <code style="display: block;">
-                        UPDATE aluno <br>
-                        SET id_ano_curso = 2 <br>
-                        WHERE id_aluno = 5;
-                    </code>
-                </section>
-                <!--FIM-->
-
-                <!--COMANDO B-->
-                <h4>COMANDO &rightarrow; ALTERAR TODOS OS REGISTOS</h4>
-                <section>
-                    <code style="display: block;">
-                        UPDATE aluno <br>
-                        SET morada = 'Rua Igual, Vila Nova de Gaia';
+                        CREATE VIEW view_cliente_encomenda AS <br>
+                        SELECT c.nome AS nome_cliente, c.endereco AS morada_cliente, e.descricao AS conteudo_encomenda <br>
+                        FROM cliente c <br>
+                        INNER JOIN encomenda e ON c.cliente_id = e.cliente_id;
                     </code>
                 </section>
                 <!--FIM-->
@@ -2486,9 +2477,9 @@
                 <hr>
 
                 <!--RESULTADO-->
-                <h4>RESULTADO &rightarrow; ATUALIZAÇÃO DE DADOS</h4>
+                <h4>RESULTADO &rightarrow; CRIAÇÃO DE VIEW</h4>
                 <section>
-                    <img src="imgs/consulta_manipulacao_dados/exemplo6.jpeg" alt="">
+                    <img src="imgs//views/create_view.jpeg" alt="">
                 </section>
                 <!--FIM-->
             </section>
@@ -2496,24 +2487,17 @@
 
             <!--EXEMPLO 7-->
             <section>
-                <h2>EXEMPLO #7 &rightarrow; ELIMINAR DADOS</h2>
-                <p>Eliminar todos os registos da tabela <code>aluno</code> e eliminar o encarregado de educação com maior idade.</p>
+                <h2>EXEMPLO #7 &rightarrow; ALTERAR VIEW</h2>
+                <p>Alterar a <i>view</i> criada anteriormente.</p>
 
                 <!--COMANDO A-->
-                <h4>COMANDO &rightarrow; ELIMINAR TODOS OS REGISTOS</h4>
+                <h4>COMANDO &rightarrow; CREATE OR REPLACE VIEW</h4>
                 <section>
                     <code style="display: block;">
-                        DELETE FROM aluno;
-                    </code>
-                </section>
-                <!--FIM-->
-
-                <!--COMANDO B-->
-                <h4>COMANDO &rightarrow; ELIMINAR UM REGISTO</h4>
-                <section>
-                    <code style="display: block;">
-                        DELETE FROM enc_educacao <br>
-                        WHERE idade = (SELECT MAX(idade) FROM enc_educacao);
+                        CREATE OR REPLACE VIEW view_cliente_encomenda AS <br>
+                        SELECT c.nome AS nome_cliente, c.endereco AS morada_cliente, e.descricao AS conteudo_encomenda <br>
+                        FROM cliente c <br>
+                        FULL JOIN encomenda e ON c.cliente_id = e.cliente_id;
                     </code>
                 </section>
                 <!--FIM-->
@@ -2521,12 +2505,9 @@
                 <hr>
 
                 <!--RESULTADO-->
-                <h4>RESULTADO &rightarrow; ELIMINAR DADOS</h4>
+                <h4>RESULTADO &rightarrow; ALTERAR VIEW</h4>
                 <section>
-                    <img src="imgs/consulta_manipulacao_dados/exemplo7_1.jpeg" alt="">
-                </section>
-                <section>
-                    <img src="imgs/consulta_manipulacao_dados/exemplo7_2.jpeg" alt="">
+                    <img src="imgs/views/create_replace_view.jpeg" alt="">
                 </section>
                 <!--FIM-->
             </section>
@@ -2534,24 +2515,16 @@
 
             <!--EXEMPLO 8-->
             <section>
-                <h2>EXEMPLO #8 &rightarrow; LIMPAR DADOS</h2>
-                <p>Eliminar todos os registos das tabelas <code>enc_educacao</code> e <code>curso</code>. O comando padrão seria <code>TRUNCATE</code>. Mas, devido à presença de chaves estrangeiras que estão relacionadas a estas tabelas, existe a inclusão da palavra-chave <code>CASCADE</code>.</p>
+                <h2>EXEMPLO #8 &rightarrow; CRIAR ÍNDICE</h2>
+                <p>Criar um índice para o nome do cliente.</p>
                 <hr>
 
                 <!--COMANDO A-->
-                <h4>COMANDO &rightarrow; TABELA ENC_EDUCACAO</h4>
+                <h4>COMANDO &rightarrow; CREATE INDEX</h4>
                 <section>
                     <code style="display: block;">
-                        TRUNCATE TABLE enc_educacao CASCADE;
-                    </code>
-                </section>
-                <!--FIM-->
-
-                <!--COMANDO B-->
-                <h4>COMANDO &rightarrow; TABELA CURSO</h4>
-                <section>
-                    <code style="display: block;">
-                        TRUNCATE TABLE curso CASCADE;
+                        CREATE INDEX nome_index <br>
+                        ON cliente (nome);
                     </code>
                 </section>
                 <!--FIM-->
@@ -2559,87 +2532,15 @@
                 <hr>
 
                 <!--RESULTADO-->
-                <h4>RESULTADO &rightarrow; ELIMINAR DADOS</h4>
+                <h4>RESULTADO &rightarrow; CRIAR ÍNDICE</h4>
                 <section>
-                    <img src="imgs/consulta_manipulacao_dados/exemplo8_1.jpeg" alt="">
-                </section>
-                <section>
-                    <img src="imgs/consulta_manipulacao_dados/exemplo8_2.jpeg" alt="">
+                    <img src="imgs/indices/create_index.jpeg" alt="">
                 </section>
                 <!--FIM-->
             </section>
             <!--FIM-->
         </div>
         <!--FIM-->
-
-        <h4><i>OUTROS CONCEITOS</i></h4>
-        <hr>
-
-        <!--ACORDIÃO SQL DATA TYPES-->
-        <button class="accordion"><b>SQL Data Types</b> &rightarrow; Tipos de dados em SQL.</button>
-        <!--INÍCIO-->
-        <div class="panel">
-            <section>
-                <h2>SQL Data Types</h2>
-                <p>Os tipos de dados em SQL definem o tipo de valor que pode ser armazenado em uma coluna de tabela. Por exemplo, se você deseja que uma coluna armazene apenas valores inteiros, você pode definir seu tipo de dados como INT.</p>
-                
-                <h3>Numeric data types</h3>
-                <ul>
-                    <li>BIT</li>
-                    <li>TINYINT</li>
-                    <li>SMALLINT</li>
-                    <li>INT</li>
-                    <li>BIGINT</li>
-                    <li>DECIMAL</li>
-                    <li>NUMERIC</li>
-                    <li>FLOAT</li>
-                    <li>REAL</li>
-                </ul>
-                
-                <h3>Date and Time data types</h3>
-                <ul>
-                    <li>DATE</li>
-                    <li>TIME</li>
-                    <li>DATETIME</li>
-                    <li>TIMESTAMP</li>
-                    <li>YEAR</li>
-                </ul>
-                
-                <h3>Character and String data types</h3>
-                <ul>
-                    <li>CHAR</li>
-                    <li>VARCHAR</li>
-                    <li>VARCHAR(max)</li>
-                    <li>TEXT</li>
-                </ul>
-                
-                <h3>Unicode character string data types</h3>
-                <ul>
-                    <li>NCHAR</li>
-                    <li>NVARCHAR</li>
-                    <li>NVARCHAR(max)</li>
-                    <li>NTEXT</li>
-                </ul>
-                
-                <h3>Binary data types</h3>
-                <ul>
-                    <li>BINARY</li>
-                    <li>VARBINARY</li>
-                    <li>VARBINARY(max)</li>
-                    <li>IMAGE</li>
-                </ul>
-                
-                <h3>Miscellaneous data types</h3>
-                <ul>
-                    <li>CLOB</li>
-                    <li>BLOB</li>
-                    <li>XML</li>
-                    <li>JSON</li>
-                </ul>
-            </section>
-        </div>
-        <!--FIM-->
-
     </section>
     
     <script src="js/main.js"></script>
